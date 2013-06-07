@@ -1,0 +1,19 @@
+---
+layout: post
+title: "About Me"
+date: 2013-06-07 17:23
+comments: true
+categories: 
+---
+
+懂广东话的同学都叫我揸枪，不懂广东话的同学都叫我昌权。
+
+1989 born in Sihui
+
+2013 graduated from HDU
+
+now working at Guangzhou
+
+热爱技术和编程工作，立志成为一个真正的黑客（hacker）。
+
+email: hugochougt(at)gmail.com （基本每天都收邮件）
