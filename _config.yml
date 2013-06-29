@@ -4,7 +4,7 @@
 
 url: http://zhaqiang.github.io
 title: 揸枪同学的黑板报
-subtitle: To be a real hacker.
+subtitle: If you didn't write it down, it didn't happen.
 author: zhaqiang
 simple_search: http://google.com/search
 description: zhaqiang's personal blog
@@ -63,8 +63,8 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 
 # Github repositories
-github_user:
-github_repo_count: 0
+github_user: zhaqiang
+github_repo_count: 4
 github_show_profile_link: true
 github_skip_forks: true
 
@@ -90,7 +90,7 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
+disqus_short_name: zhaqiang
 disqus_show_comment_count: false
 
 # Google Analytics
