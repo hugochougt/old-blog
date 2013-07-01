@@ -144,3 +144,12 @@ public class MySqlTest {
 ### 参考链接
  1. [MySQL安裝指南](http://wiki.ubuntu.org.cn/index.php?title=MySQL%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97&variant=zh-hant)
  2. [Eclipse設定JDBC連接MySQL資料庫](http://blog.yslifes.com/archives/918)
+
+ **-EOF-**
+
+ -----
+
+ 版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")
+
+ 如果觉得本文对你有帮助，可以请作者喝[咖啡](http://me.alipay.com/zhaqiang)
+
