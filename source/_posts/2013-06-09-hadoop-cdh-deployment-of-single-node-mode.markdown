@@ -85,10 +85,6 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
 
 <configuration>
     <property>
-        <name>mapred.job.tracker</name>
-        <value>localhost:9001</value>
-    </property>
-    <property>
         <name>mapreduce.framework.name</name>
         <value>yarn</value>
     </property>
@@ -128,10 +124,6 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
     <property>
         <name>dfs.replication</name>
         <value>1</value>
-    </property>
-    <property>
-        <name>dfs.permissions</name>
-        <value>false</value>
     </property>
 </configuration>
 {% endcodeblock %}
