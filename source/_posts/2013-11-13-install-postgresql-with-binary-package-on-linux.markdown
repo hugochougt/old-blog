@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Install PostgreSQL with binary package on Linux"
+title: "在 Linux 下使用二进制包安装 PostgreSQL"
 date: 2013-11-13 20:43
 comments: true
 categories: [PostgreSQL] 
