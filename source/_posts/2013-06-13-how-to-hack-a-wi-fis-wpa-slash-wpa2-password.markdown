@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to Hack a Wi-Fi's WPA/WPA2 Password"
+title: "怎样黑 Wi-Fi 的 WPA/WPA2 密码？"
 date: 2013-06-13 22:30
 comments: true
 categories: [WiFi, Network]
