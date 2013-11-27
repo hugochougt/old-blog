@@ -96,9 +96,12 @@ exit 0
 根据你的安装配置修改 `checkstyleJar` 和 `checkstyleXml` 两个变量的位置即可。这个脚本会对提交至 SVN 的新增(Added)和更新(Updated)的 Java 文件进行 Checkstyle 检查，其他后缀名的文件不予理会。
 
 参考文献：
-    1. [How to enforce Checkstyle in SVN commits : Simple Guide](http://www.iamjk.com/2009/06/how-to-enforce-checkstyle-in-svn.html)
-    2. [用checkstyle实现svn的代码规范性检查](http://tech.it168.com/a2011/0608/1201/000001201666.shtml)
-    3. [Svn与Checkstyle整合](http://xtony.blog.51cto.com/3964396/811418)
+
+ 1. [How to enforce Checkstyle in SVN commits : Simple Guide](http://www.iamjk.com/2009/06/how-to-enforce-checkstyle-in-svn.html)
+ 
+ 2. [用checkstyle实现svn的代码规范性检查](http://tech.it168.com/a2011/0608/1201/000001201666.shtml)
+
+ 3. [Svn与Checkstyle整合](http://xtony.blog.51cto.com/3964396/811418)
 
 **-EOF-**
 
