@@ -10,7 +10,7 @@ categories: [MySQL, High Availability]
 
 MySQL HA 的关键点不外乎**数据同步**和**失效切换**这两点。对于数据同步，MySQL 本身就有异步复制和半同步复制的功能（半同步复制在 MySQL 5.5之后的版本才有）。异步和半同步复制都会有数据不一致的风险，要保证数据一致性，就只能采用共享存储的方法。共享存储这一块我也没有做太多的调研，不过猜测使用最广泛的应该是 DRBD（Distributed Replicated Block Device），因为 NAS 和 SAN 等共享存储方案的成本太高。至于失效切换（failover），我了解到的就只有 [Keepalived](http://www.keepalived.org/) 和 [Heartbeat](http://www.linux-ha.org/wiki/Heartbeat)。一般来说 Keepalived 会搭配 MySQL Master-Master replication 的架构，而 Heartbeat 则搭配 DRBD。
 
-令外两个较为独立的 HA 解决方案是 [Percona](www.percona.com) 公司开发的 Percona XtraDB Cluster 和 MySQL 本身的 MySQL Cluster。
+另外两个较为独立的 HA 解决方案是 [Percona](www.percona.com) 公司开发的 Percona XtraDB Cluster 和 MySQL 本身的 MySQL Cluster。
 
 在你选择一个高可用性方案前，你需要先问问自己这个问题：
 

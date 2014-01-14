@@ -16,7 +16,4 @@ now working at Guangzhou
 
 热爱技术和编程工作，精通多门编程语言...的 Hello World，立志成为一个真正的黑客。这个博客没有特定的主题，将会记录一切我想表达和分享的内容。
 
-如果觉得这个博客的内容对您有帮助，欢迎请揸枪同学饮咖啡：
- <a href='https://me.alipay.com/zhaqiang' target=_blank>支付宝请饮</a>
-
-P.S. Feel free to contact me: hugochougt (at) gmail.com 
+Feel free to contact me: hugochougt (at) gmail.com 

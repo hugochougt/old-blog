@@ -265,7 +265,6 @@ GPA = ∑（各科学分绩点 * 各科的学分）/ 总学分
 各科学分绩点 =（各科成绩 - 45）/ 10	（成绩 >= 95 积点按 5 算，低于 60 绩点直接为 0）
 
 **-EOF-**
-___
 
 版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")
 
