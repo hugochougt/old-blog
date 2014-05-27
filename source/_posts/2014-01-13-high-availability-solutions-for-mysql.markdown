@@ -41,5 +41,3 @@ MySQL HA 的关键点不外乎**数据同步**和**失效切换**这两点。对
 **-EOF-**
 
 版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")
-
-如果觉得本文对你有帮助，可以请作者喝[咖啡](http://me.alipay.com/zhaqiang "alipay")

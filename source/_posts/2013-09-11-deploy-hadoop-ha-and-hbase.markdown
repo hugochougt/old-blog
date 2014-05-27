@@ -331,5 +331,3 @@ ssh 登录到 active NameNode 所在节点，运行 `start-hbase.sh` 脚本启�
 **-EOF-**
 
 版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")
-
-如果觉得本文对你有帮助，可以请作者喝[咖啡](http://me.alipay.com/zhaqiang)。
