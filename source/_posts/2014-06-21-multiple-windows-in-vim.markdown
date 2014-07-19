@@ -19,8 +19,8 @@ categories: [Vim, multiple windows]
 
 Resize:
 
- *  `CTRL-W``=` 將所有窗口变成同样的大小
- *  `CTRL-W``-n` 將当前窗口减小 n 行。同理，`+` 增加 n 行（`:resize +n` 有同样的效果）
+ *  `CTRL-W =` 將所有窗口变成同样的大小
+ *  `CTRL-W -n` 將当前窗口减小 n 行。同理，`+` 增加 n 行（`:resize +n` 有同样的效果）
  *  `CTRL-W <` 和 `CTRL-W >` 分别减少和增加窗口的宽度
 
 以上的 Vim 操作足够应付多数情况下的多窗口操作需求了。
