@@ -3,11 +3,17 @@
 # ----------------------- #
 
 url: http://zhaqiang.github.io
+<<<<<<< HEAD
 title: My Octopress Blog
 subtitle: A blogging framework for hackers.
 author: Your Name
+=======
+title: 揸枪同学的黑板报
+subtitle: If you didn't write it down, it didn't happen.
+author: zhaqiang
+>>>>>>> source
 simple_search: http://google.com/search
-description:
+description: zhaqiang's personal blog
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -63,14 +69,14 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 
 # Github repositories
-github_user:
-github_repo_count: 0
+github_user: zhaqiang
+github_repo_count: 4
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
 twitter_user:
-twitter_tweet_button: true
+twitter_tweet_button: false 
 
 # Google +1
 google_plus_one: false
@@ -90,11 +96,11 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
+disqus_short_name: zhaqiang
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-42117600-1
 
 # Facebook Like
 facebook_like: false
