@@ -188,7 +188,7 @@ ssh 登录到某台 ZooKeeper 的机器，在 zookeeper-3.4.5-cdh4.2.0/bin 目�
 ## 创建 fencing script
 將以下脚本内容保存为 fencingscript.sh 脚本，修改执行权限后，将其复制到运行 NameNode 服务的两台机器上的 $HOME 目录里（也即 hdfs-site.xml 配置的 `dfs.ha.fencing.methods` 属性所设置的目录）。
 
-{% codeblock fencingscript.sh %}
+```bash
 #!/bin/bash
 
 isNNEmpty=`jps | grep NameNode`
@@ -196,7 +196,7 @@ if [ "X${isNNEmpty}" = "X" ]; then
     ${HADOOP_HOME}/sbin/hadoop-daemon.sh start namenode
 fi
 exit 0
-{% endcodeblock %}
+```
 
 这个脚本主要是在两台 NameNode 的其中一台宕机，可以自动重启宕机的 NameNode。
 

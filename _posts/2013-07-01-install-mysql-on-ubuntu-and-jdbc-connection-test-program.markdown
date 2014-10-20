@@ -19,7 +19,7 @@ MySQL 的配置优化还请自行 google，因为我也不懂。
 
 <!-- more -->
 
-{% codeblock MySqlTest.java lang:java %}
+```java
 package mysql;
 
 import java.sql.*;
@@ -139,7 +139,7 @@ public class MySqlTest {
         test.showUsers();
     }
 }
-{% endcodeblock %}
+```
 
 ### 参考链接
  1. [MySQL安裝指南](http://wiki.ubuntu.org.cn/index.php?title=MySQL%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97&variant=zh-hant)

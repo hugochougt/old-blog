@@ -14,9 +14,9 @@ categories: [Java, javac]
 
 "Enable recommended warnings"就是让编译器对一些普遍容易出现的代码问题进行检查。例如使用`javac -Xlint:fallthrough`这条编译命令的效果就是，当代码中的 switch 代码块缺少 break 时，编译器给出警告报告。
 
-{% blockquote JAVA 核心技术 卷I：基础知识 %}
-术语“lint”最初用来描述一种定位 C 程序中潜在问题的工具，现在通常用于描述查找可疑的、但不违背语法规则的代码问题的工具。
-{% endblockquote %}
+*术语“lint”最初用来描述一种定位 C 程序中潜在问题的工具，现在通常用于描述查找可疑的、但不违背语法规则的代码问题的工具。*
+
+——《JAVA 核心技术 卷I：基础知识》
 
 [lint wikipedia](http://en.wikipedia.org/wiki/Lint_\(software\))
 

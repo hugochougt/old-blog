@@ -28,7 +28,8 @@ categories:
 **GPA: 3.95**
 <!-- more -->
 成绩单：
-{% codeblock score-report.yaml lang:yaml%}
+
+```yml
 name: 揸枪同学
 speciality: 计算机科学与技术
 courses:
@@ -229,11 +230,13 @@ courses:
  - name: 大学生心理健康教育
    score: 92
    credit: 1.0
-{% endcodeblock %}
+```
 
 为什么我要用 yaml 格式来保存？因为GPA 是由下面的 ruby 程序计算出来的：
-{% codeblock GPAcalculator.rb lang:ruby %}
+
+```ruby
 # GPA calculator of HDU
+
 require 'yaml'
 report = YAML.load_file('score-report.yaml')
 $sumOfCredit = 0
@@ -256,7 +259,7 @@ report['courses'].each do |course|
 end
 
 print "GPA: ", $sumOfWeightedScore / $sumOfCredit, "\n"
-{% endcodeblock %}
+```
 
 HDU 的 GPA 计算方法:
 

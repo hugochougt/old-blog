@@ -25,7 +25,7 @@ categories: [hadoop, CDH]
 
 ### 1、配置环境变量
 往 ~/.bashrc 文件末尾添加以下内容：
-{% codeblock %}
+```
 # Hadoop CDH env variables
 export HADOOP_PREFIX=${HOME}/Programs/hadoop
 export HADOOP_HOME=${HADOOP_PREFIX}
@@ -40,7 +40,7 @@ export HDFS_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
 export PATH=${HADOOP_PREFIX}/bin:${PATH}
 
 export CLASSPATH=${JAVA_HOME}/lib:${JRE_HOME}/lib:${HADOOP_HOME}/lib:${CLASSPATH}
-{% endcodeblock %}
+```
 
 执行 `source ~/.bashrc` 使其生效，然后执行 `hadoop version` 确认环境变量生效。
 
@@ -48,7 +48,7 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
 
 ### 2、配置 core-site.xml
 將 ${HADOOP_CONF_DIR}/core-site.xml 文件修改为以下内容：
-{% codeblock %}
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <!--
@@ -73,11 +73,12 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
         <value>hdfs://localhost:9000</value>
     </property>
 </configuration>
-{% endcodeblock %}
+```
 
 ### 3、配置 mapred-site.xml
 將 ${HADOOP_CONF_DIR} 目录下的 mapred-site.xml.template 改名为 mapred-site.xml，并修改为以下内容：
-{% codeblock %}
+
+```xml
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
@@ -89,11 +90,12 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
         <value>yarn</value>
     </property>
 </configuration>
-{% endcodeblock %}
+```
 
 ### 4、配置 hdfs-site.xml
 將 ${HADOOP_CONF_DIR}/hdfs-site.xml 文件修改为以下内容：
-{% codeblock %}
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <!--
@@ -126,12 +128,14 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
         <value>1</value>
     </property>
 </configuration>
-{% endcodeblock %}
+```
+
 然后创建 /data/hadoop/datanode 和 /data/hadoop/namenode 这两个目录。当然你也可以选择其他目录来保存 namenode 和 datanode 的数据。
 
 ### 5、配置 yarn-site.xml
 將 ${HADOOP_CONF_DIR}/yarn-site.xml 文件修改为以下内容：
-{% codeblock %}
+
+```xml
 <?xml version="1.0"?>
 <configuration>
 <!-- Site specific YARN configuration properties -->
@@ -140,13 +144,14 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
         <value>mapreduce.shuffle</value>
     </property>
 </configuration>
-{% endcodeblock %}
+```
 
 ### 6、格式化 Hadoop namenode
 在终端(Terminal)中执行以下命令：
-{% codeblock %}
+
+``
 hadoop namenode -format
-{% endcodeblock %}
+```
 
 ### 7、启动 Hadoop 服务
 执行 ${HADOOP_HOME}/sbin 目录下的 start-all.sh 脚本。你可能会留意到 "This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh" 这个信息，在单节点模式下可以忽略这个信息。
@@ -160,14 +165,16 @@ hadoop namenode -format
 
 ### 8、检查 Hadoop 能否提供正常服务
 首先將本地的一个文本文件复制到 HDFS 里：
-{% codeblock %}
+
+```
 hadoop fs -put <local-file> /input
-{% endcodeblock %}
+```
 
 然后执行 CDH 自带的 wordcount 示例程序：
-{% codeblock %}
+
+```
 hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar wordcount /input /output
-{% endcodeblock %}
+```
 
 如无意外，终端就会显示 “INFO mapreduce.Job: Job job_XXX completed successfully” 的信息。至此，Hadoop CDH 的单节点部署算是成功了。
 
