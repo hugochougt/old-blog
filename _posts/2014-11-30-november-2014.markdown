@@ -1,0 +1,18 @@
+---
+layout: post
+title: "November, 2014"
+date: 2014-011-30 18:32
+comments: true
+---
+
+2014年11月絕對是今年最折騰的一個月了：
+
+先是拒掉了光大軟件月薪 7K 的 Java 開發職位，接受了 beansmile 的 Ruby & Rails 開發工作。接着又因出智慧牙，回了兩趟家拔牙。然後又先後買了心儀已久的 iPhone 6 和 MacBook Pro。中間還穿插幾個好朋友箍煲、跑路、新公司搬家等各種雜事。
+
+感謝二表姐在每次回家拔牙都幫忙去醫院排號和陪我拔牙。還有老豆，值完通宵班，一收工就過來醫院看我。最後感謝媽媽的愛心住家飯。
+
+衷心希望新的12月到年底可以不那麼折騰。
+
+**-EOF-**
+
+版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")
