@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "November, 2014"
-date: 2014-011-30 18:32
+date: 2014-11-30 18:32
 comments: true
 ---
 
