@@ -33,5 +33,3 @@ categories: [mysql, mysqldump]
 最后就是前面提到的 triggers、stored routines 和 events了，这些都容易在备份数据库的时候被忽略，还请注意。
 
 **-EOF-**
-
-版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")

@@ -3,7 +3,7 @@ layout: post
 title: "我的第一封辞职信"
 date: 2014-08-14 22:49
 comments: true
-categories: 
+categories:
 ---
 
 2014年8月10日下午，我递交了人生中的第一封辞职信。
@@ -28,6 +28,3 @@ categories:
     XXXX年X月X日
 
 **-EOF-**
-
-版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")
-

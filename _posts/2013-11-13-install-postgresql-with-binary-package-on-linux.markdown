@@ -3,7 +3,7 @@ layout: post
 title: "在 Linux 下使用二进制包安装 PostgreSQL"
 date: 2013-11-13 20:43
 comments: true
-categories: [PostgreSQL] 
+categories: [PostgreSQL]
 ---
 
 今天在公司的内网中终于成功使用编译好的二进制包安装 PostgreSQL，记录一下，以免下次安装又忘记了操作步骤。本文应该对于那些机器不能联网、但已经有了编译好的 PostgreSQL 安装包、却不知道如何配置和启动 PostgreSQL 的同学有帮助。
@@ -43,7 +43,3 @@ categories: [PostgreSQL]
 使用 `psql <dbname>` 命令来访问数据库。
 
 **-EOF-**
-
-------
-
-版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")

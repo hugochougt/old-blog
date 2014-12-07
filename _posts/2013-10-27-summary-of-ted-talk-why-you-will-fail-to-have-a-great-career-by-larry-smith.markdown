@@ -3,7 +3,7 @@ layout: post
 title: "整理和总结 TED Talk: Why you will fail to have a great career (by Larry Smith)"
 date: 2013-10-27 19:30
 comments: true
-categories: 
+categories:
 ---
 
 最近一个月重复看得最多的一个 TED Talk: [Larry Smith: Why you will fail to have a great career](http://www.ted.com/talks/larry_smith_why_you_will_fail_to_have_a_great_career.html)。看了不下20次了，觉得十分有必要整理和总结下 Smith 教授（[他的简介](http://www.ted.com/speakers/larry_smith.html)）的演讲。
@@ -43,5 +43,3 @@ categories:
 （答案请自行观看该演讲后寻找。）
 
 **-EOF-**
-
-版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")

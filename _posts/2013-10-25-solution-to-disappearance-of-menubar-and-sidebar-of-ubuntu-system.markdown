@@ -11,5 +11,3 @@ categories: [ubuntu]
 Ubuntu 已经不是第一次出现这个问题了。以前都是重启一两次就解决，这次忍了两天，终于找到了一个靠谱的解决方案。
 
  **-EOF-**
-
- 版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")

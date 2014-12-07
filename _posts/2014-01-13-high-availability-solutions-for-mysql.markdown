@@ -39,5 +39,3 @@ MySQL HA 的关键点不外乎**数据同步**和**失效切换**这两点。对
 本来想贴出性能比较的数据表的，不过 google 了一下，发现 Octopress 不支持表格，那就算了。
 
 **-EOF-**
-
-版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")

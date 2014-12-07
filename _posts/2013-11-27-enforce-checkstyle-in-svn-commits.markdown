@@ -98,11 +98,9 @@ exit 0
 参考文献：
 
  1. [How to enforce Checkstyle in SVN commits : Simple Guide](http://www.iamjk.com/2009/06/how-to-enforce-checkstyle-in-svn.html)
- 
+
  2. [用checkstyle实现svn的代码规范性检查](http://tech.it168.com/a2011/0608/1201/000001201666.shtml)
 
  3. [Svn与Checkstyle整合](http://xtony.blog.51cto.com/3964396/811418)
 
 **-EOF-**
-
-版权声明：自由转载-非商用-非衍生-保持署名 | [Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh "CC 3.0")
