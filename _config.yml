@@ -1,15 +1,24 @@
-# url: http://localhost:4000 for local test
+url: http://0.0.0.0:4000 # for local test
+#url: http://zhaqiang.github.io # for production
 
+# Build settings
 markdown: rdiscount
+highlighter: pygments
 pygments: true
 
-title: 揸枪同学的黑板报
+# Site settings
+title: "揸枪同学的黑板报"
+cover: "/assets/images/header_bg.jpg"
+description: "If you don't write it down, it didn't happen."
+logo: "/assets/images/z_logo.jpg"
 author:
   name: zhaqiang
   email: hugochougt@gmail.com
-  github: zhaqiang
+  avatar: "/assets/images/author.jpg"
+  bio: "一個唱歌愛跑調的Programmer | 有錢就敗家君"
 
-production_url: http://zhaqiang.github.io
+
+baseurl: ""
+paginate: 5
 
 exclude: ["README.md", "Rakefile", "changelog.md"]
-highlighter: pygments
