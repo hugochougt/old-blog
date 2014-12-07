@@ -8,6 +8,8 @@ categories: [checkstyle, SVN, pre-commit]
 
 本文主要介绍怎样设置 [Checkstyle](checkstyle.sourceforge.net) 使得向 SVN 提交 Java 代码时进行代码规范检查。
 
+<!-- more -->
+
 ## 安装 Checkstyle
 到 Checkstyle 的[下载页面](http://sourceforge.net/projects/checkstyle/files/checkstyle)选择你需要的版本下载，一般都是选最新版，然后解压。对我们有用的是 checkstyle-x.x-all.jar 这个 jar 包。
 

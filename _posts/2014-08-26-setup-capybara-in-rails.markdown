@@ -20,7 +20,7 @@ If the application that you are testing is a Rails app, add this line to your te
 
 
 
-```ruby
+``` ruby
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'

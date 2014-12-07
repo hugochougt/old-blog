@@ -25,6 +25,7 @@ categories: [hadoop, CDH]
 
 ### 1、配置环境变量
 往 ~/.bashrc 文件末尾添加以下内容：
+
 ```
 # Hadoop CDH env variables
 export HADOOP_PREFIX=${HOME}/Programs/hadoop
@@ -47,25 +48,12 @@ export CLASSPATH=${JAVA_HOME}/lib:${JRE_HOME}/lib:${HADOOP_HOME}/lib:${CLASSPATH
 P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
 
 ### 2、配置 core-site.xml
+
 將 ${HADOOP_CONF_DIR}/core-site.xml 文件修改为以下内容：
-```xml
+
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
--->
-
-<!-- Put site-specific property overrides in this file. -->
 
 <configuration>
     <property>
@@ -73,16 +61,16 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
         <value>hdfs://localhost:9000</value>
     </property>
 </configuration>
+
 ```
 
 ### 3、配置 mapred-site.xml
+
 將 ${HADOOP_CONF_DIR} 目录下的 mapred-site.xml.template 改名为 mapred-site.xml，并修改为以下内容：
 
-```xml
+``` xml
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-
-<!-- Put site-specific property overrides in this file. -->
 
 <configuration>
     <property>
@@ -90,29 +78,15 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
         <value>yarn</value>
     </property>
 </configuration>
+
 ```
 
 ### 4、配置 hdfs-site.xml
 將 ${HADOOP_CONF_DIR}/hdfs-site.xml 文件修改为以下内容：
 
-```xml
+``` xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
--->
-
-<!-- Put site-specific property overrides in this file. -->
 
 <configuration>
     <property>
@@ -128,34 +102,37 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
         <value>1</value>
     </property>
 </configuration>
+
 ```
 
 然后创建 /data/hadoop/datanode 和 /data/hadoop/namenode 这两个目录。当然你也可以选择其他目录来保存 namenode 和 datanode 的数据。
 
 ### 5、配置 yarn-site.xml
+
 將 ${HADOOP_CONF_DIR}/yarn-site.xml 文件修改为以下内容：
 
-```xml
+``` xml
 <?xml version="1.0"?>
 <configuration>
-<!-- Site specific YARN configuration properties -->
     <property>
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce.shuffle</value>
     </property>
 </configuration>
+
 ```
 
 ### 6、格式化 Hadoop namenode
+
 在终端(Terminal)中执行以下命令：
 
-``
+```
 hadoop namenode -format
 ```
 
 ### 7、启动 Hadoop 服务
-执行 ${HADOOP_HOME}/sbin 目录下的 start-all.sh 脚本。你可能会留意到 "This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh" 这个信息，在单节点模式下可以忽略这个信息。
-然后执行一下 `jps` 命令，如果配置正确，应该会有以下5个 Hadoop 的进程：
+
+执行 ${HADOOP_HOME}/sbin 目录下的 start-all.sh 脚本。你可能会留意到 "This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh" 这个信息，在单节点模式下可以忽略这个信息。然后执行一下 `jps` 命令，如果配置正确，应该会有以下5个 Hadoop 的进程：
 
     NameNode
     SecondaryNameNode
@@ -164,6 +141,7 @@ hadoop namenode -format
     ResourceManager
 
 ### 8、检查 Hadoop 能否提供正常服务
+
 首先將本地的一个文本文件复制到 HDFS 里：
 
 ```
