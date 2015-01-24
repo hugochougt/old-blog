@@ -81,15 +81,17 @@ ssh 登录到某台 ZooKeeper 的机器，在 zookeeper-3.4.5-cdh4.2.0/bin 目�
 ## 配置 ~/.bashrc 文件
 编辑集群中每台机器的 ~/.bashrc 文件，添加以下 Hadoop 的环境变量：
 
-	export HADOOP_PREFIX=/home/hadoop/hadoop-2.0.0-cdh4.2.0
-	export HADOOP_HOME=${HADOOP_PREFIX}
-	export HADOOP_MAPRED_HOME=${HADOOP_PREFIX}
-	export HADOOP_COMMON_HOME=${HADOOP_PREFIX}
-	export HADOOP_HDFS_HOME=${HADOOP_PREFIX}
-	export YARN_HOME=${HADOOP_PREFIX}
-	export HADOOP_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
-	export YARN_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
-	export HDFS_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
+  export HADOOP_PREFIX=/home/hadoop/hadoop-2.0.0-cdh4.2.0
+  export HADOOP_HOME=${HADOOP_PREFIX}
+  export HADOOP_MAPRED_HOME=${HADOOP_PREFIX}
+  export HADOOP_COMMON_HOME=${HADOOP_PREFIX}
+  export HADOOP_HDFS_HOME=${HADOOP_PREFIX}
+  export YARN_HOME=${HADOOP_PREFIX}
+  export HADOOP_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
+  export YARN_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
+  export HDFS_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
+  export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+  export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
 
 修改好后执行 `source ~/.bashcr` 命令使环境变量生效。
 
