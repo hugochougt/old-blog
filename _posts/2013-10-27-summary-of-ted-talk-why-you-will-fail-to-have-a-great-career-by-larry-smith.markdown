@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "整理和总结 TED Talk: Why you will fail to have a great career (by Larry Smith)"
+title: "TED Talk: Why you will fail to have a great career"
 date: 2013-10-27 19:30
 comments: true
 categories:

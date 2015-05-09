@@ -1,11 +1,11 @@
 ---
-layout: post
+layout: page
 title: "About"
 date: 2013-06-07 17:23
 permalink: /about/
 ---
 
-懂广东话的同学都叫我揸枪，不懂广东话的同学都叫我昌权，英文叫 Hugo。
+懂广东话的同学都叫我揸枪，不懂广东话的同学都叫我昌权，英文名是 Hugo。
 
 1989 born in Sihui
 

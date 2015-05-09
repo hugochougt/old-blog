@@ -29,7 +29,7 @@ categories:
 <!-- more -->
 成绩单：
 
-```yml
+```
 name: 揸枪同学
 speciality: 计算机科学与技术
 courses:
