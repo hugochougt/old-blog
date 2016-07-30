@@ -1,22 +1,16 @@
 url: http://zhaqiang.github.io # for production
-# url: http://0.0.0.0:4000 # for local test
 
 # Build settings
-highlighter: pygments
-markdown: redcarpet
+highlighter: rouge
+markdown: kramdown
 permalink: pretty
-redcarpet:
-  extensions:
-    - smart
 
 # Site settings
 title: "揸枪同学的黑板报"
 description: "If you don't write it down, it didn't happen."
-singoff: zhaqiang
 
 # email: hugochougt@gmail.com
-# avatar: "/assets/images/author.jpg"
-# bio: "一個唱歌愛跑調的Programmer | 有錢就敗家君"
+# bio: "be nice & be professional & be cool"
 
 links:
   - name:         About
@@ -30,5 +24,3 @@ links:
   - name:         GitHub
     url:          http://github.com/zhaqiang
     external:     true
-
-paginate: 5
