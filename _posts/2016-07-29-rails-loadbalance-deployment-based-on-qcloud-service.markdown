@@ -33,7 +33,7 @@ MySQL 数据库高可用的架构，考虑到一般网站的访问量、对 down
 
 ### 自建方案架构图
 
-![自建方案架构图](/images/self-build-network-design-chart.jpg)
+![自建方案架构图](/images/posts/self-build-network-design-chart.jpg)
 
 ### 自建方案费用
 
@@ -74,7 +74,7 @@ MySQL 数据库高可用的架构，考虑到一般网站的访问量、对 down
 
 ### 架构图
 
-![腾讯云服务方案网络架构图](/images/qcloud-service-network-design-chart.jpg)
+![腾讯云服务方案网络架构图](/images/posts/qcloud-service-network-design-chart.jpg)
 
 ### 最低费用总计
 
