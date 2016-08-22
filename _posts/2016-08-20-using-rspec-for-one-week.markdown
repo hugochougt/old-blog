@@ -5,14 +5,14 @@ date: 2016-08-20 15:30
 comments: true
 ---
 
-过去一个星期，在开发中使用 RSpec 对使用 Grape 编写的 API 进行了功能测试。在这个过程中现学现用，CTO 和同事的对我写的测试提出了很多评审建议，现在记录下来，以备日后查看。
+过去一个星期，在开发中使用 RSpec 对使用 Grape 编写的 API 进行了功能测试。在这个过程中现学现用，CTO 和同事对我写的测试提出了很多评审建议，现在记录下来，以备日后查看。
 
 ## API 功能测试套路
 
-  setup data & assert original state
-  do something
-  assert response
-  assert new state
+1. setup data & assert original state
+2. do something
+3. assert response
+4. assert new state
 
 例如要测试用户注册，那就要先断言系统中没有用户，用户注册成功后，再断言系统中多了一个新用户。
 
