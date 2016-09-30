@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "RSpec 使用一周小结（下篇）——使用 FactoryGirl 准备测试数据"
-date: 2016-08-20 15:30
+date: 2016-09-30 20:10
 comments: true
 ---
 
