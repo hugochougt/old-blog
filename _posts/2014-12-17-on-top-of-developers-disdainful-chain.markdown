@@ -3,7 +3,6 @@ layout: post
 title: "到达 developer 鄙视链的顶端"
 date: 2014-12-17 22:44
 image: /assets/article_images/despise.jpg
-comments: true
 ---
 
 突然来了兴致，根据[軟體工程師的鄙視鏈](http://vinta.ws/blog/695)一文，整理一下想要到达 developer 鄙视链的顶端需要掌握哪些东西。

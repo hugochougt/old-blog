@@ -2,7 +2,6 @@
 layout: post
 title: "2014年过得真他喵快"
 date: 2015-01-01 12:00
-comments: true
 ---
 
 **2014年的一些小成就**

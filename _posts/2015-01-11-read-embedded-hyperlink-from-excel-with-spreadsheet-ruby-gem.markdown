@@ -2,7 +2,6 @@
 layout: post
 title: "使用 spreadsheet gem 读取 Excel 单元格中内嵌的 hyperlink"
 date: 2015-01-11 10:44
-comments: true
 ---
 
 ### Task

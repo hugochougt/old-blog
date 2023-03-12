@@ -2,8 +2,7 @@
 layout: post
 title: "Setup Capybara in Rails"
 date: 2014-08-26 22:51
-comments: true
-categories: [Rails, Capybara]
+tags: [Rails, Capybara]
 ---
 
 今天在新的 Rails 项目中首次使用 Capybara 进行集成测试时，报了「undefined method `visit' for ...」的 NoMethodError 错误。查看了 Capybara 的 GitHub [主页](https://github.com/jnicklas/capybara)，在 *Setup* 一节写着：

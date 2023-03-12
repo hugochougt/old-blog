@@ -2,7 +2,6 @@
 layout: post
 title: "写给周佳琦小朋友的多密码教程"
 date: 2016-01-31 18:28
-comments: true
 ---
 
 ### 确定 root key

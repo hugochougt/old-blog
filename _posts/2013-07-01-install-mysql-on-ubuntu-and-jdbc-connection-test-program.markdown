@@ -2,8 +2,7 @@
 layout: post
 title: "在 Ubuntu 上安装 MySQL 及 JDBC 连接测试程序"
 date: 2013-07-01 19:40
-comments: true
-categories: [MySQL, JDBC, Java]
+tags: [MySQL, JDBC, Java]
 ---
 
 ## 安装 MySQL

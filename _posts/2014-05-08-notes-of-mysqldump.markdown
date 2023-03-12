@@ -2,8 +2,7 @@
 layout: post
 title: "mysqldump 命令的一些用法"
 date: 2014-05-08 19:23
-comments: true
-categories: [mysql, mysqldump]
+tags: [mysql, mysqldump]
 ---
 
 导出某个数据库的所有表

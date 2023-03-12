@@ -2,8 +2,7 @@
 layout: post
 title: "Vim 多窗口基本操作"
 date: 2014-06-21 15:35
-comments: true
-categories: [Vim, multiple windows]
+tags: [Vim, multiple windows]
 ---
 
 从命令行打开多个文件时就为每个文件分配一个窗口，使用 `-o`（horizontally，横排） 或 `-O`（vertically，竖排）参数：

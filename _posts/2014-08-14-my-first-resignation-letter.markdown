@@ -2,8 +2,7 @@
 layout: post
 title: "我的第一封辞职信"
 date: 2014-08-14 22:49
-comments: true
-categories:
+tags:
 ---
 
 2014年8月10日下午，我递交了人生中的第一封辞职信。

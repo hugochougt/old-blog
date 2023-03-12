@@ -1,36 +1,55 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='{{ page.title }} - {{ site.title }}' property='og:title' />
-    <title>{{ page.title }} - {{ site.title }}</title>
-    {% include head.html %}
-  </head>
-  <body>
-    {% include header.html %}
-    <div id='container'>
-      {% include links.html %}
-      {% include pages.html %}
-      <div class="content">
-        <section class='post'>
-          <h1 class="upcase">
-            <div class='date'>{{ page.date | date_to_string }}</div>
-            {{ page.title }}
-          </h1>
-          {{ content }}
-          {% include signoff.html %}
+---
+layout: default
+---
 
+<div class="wrapper post">
+  <main class="page-content" aria-label="Content">
+    <article itemscope itemtype="https://schema.org/BlogPosting">
+      <header class="header">
+        {% if page.tags and page.tags != empty %}
+        <div class="tags">
+          {% assign tags = page.tags %}
+          <span itemprop="keywords">
+            {% for tag in tags %}
+            <a class="tag"
+              href="/tags/#{{tag | downcase | slugify}}">{{tag | upcase }}</a>{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          </span>
+        </div>
+        {% endif %}
 
-        </section>
+        <h1 class="header-title" itemprop="headline">{{ page.title | escape }}</h1>
+
+        {% if page.date %}
+        <div class="post-meta">
+          <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+            {{ page.date | date: site.date_format }}
+          </time>
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="name">{{ site.author.name }}</span>
+          </span>
+          <time hidden datetime="{{ page.modified | date_to_xmlschema }}" itemprop="dateModified">
+            {{ page.date | date: site.date_format }}
+          </time>
+          <span hidden itemprop="publisher" itemtype="Person">{{ site.author.name }}</span>
+          <span hidden itemprop="image">{{ page.image }}</span>
+          <span hidden itemprop="mainEntityOfPage">{{ page.excerpt }}</span>
+        </div>
+        {% endif %}
+      </header>
+
+      <div class="page-content" itemprop="articleBody">
+        {% include anchor_headings.html html=content anchorClass="anchor-head" beforeHeading=true h_min=1 h_max=4 %}
       </div>
-      {% if page.share == 'y' %}
-        {% include share.html %}
-      {% endif %}
+    </article>
 
-      {% if page.disqus == 'y' %}
-        {% include disqus.html %}
-      {% endif %}
-      {% include links.html %}
-    </div>
-    {% include footer.html %}
-  </body>
-</html>
+  </main>
+
+  {% if page.modified %}
+    <small class="post-updated-at">Updated on {{ page.modified | date: site.date_format }}</small>
+  {% endif %}
+
+  {% if page.next or page.previous %}
+    {% include navigation.html %}
+  {% endif %}
+</div>
