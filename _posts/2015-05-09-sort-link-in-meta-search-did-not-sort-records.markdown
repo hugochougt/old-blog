@@ -50,4 +50,4 @@ def index
 end
 ```
 
-**-EOF-**
+-EOF-

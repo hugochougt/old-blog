@@ -31,4 +31,4 @@ tags: [mysql, mysqldump]
 
 最后就是前面提到的 triggers、stored routines 和 events了，这些都容易在备份数据库的时候被忽略，还请注意。
 
-**-EOF-**
+-EOF-

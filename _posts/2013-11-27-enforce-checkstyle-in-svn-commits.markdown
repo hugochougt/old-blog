@@ -7,15 +7,16 @@ tags: [checkstyle, SVN, pre-commit]
 
 本文主要介绍怎样设置 [Checkstyle](checkstyle.sourceforge.net) 使得向 SVN 提交 Java 代码时进行代码规范检查。
 
-<!-- more -->
-
 ## 安装 Checkstyle
+
 到 Checkstyle 的[下载页面](http://sourceforge.net/projects/checkstyle/files/checkstyle)选择你需要的版本下载，一般都是选最新版，然后解压。对我们有用的是 checkstyle-x.x-all.jar 这个 jar 包。
 
 ## 配置 Checkstyle 检查规则
+
 在上一步下载的压缩包里，有一个 sun_xhecks.xml 的文件，结合 Checkstyle 的配置说明文档將其修改成适合你的项目的规则。
 
 ## 测试 Checkstyle
+
 运行 Checkstyle 需要 JRE 的运行环境，请预先准备好。这里不赘述。运行以下命令进行测试：
 
     $ java -jar /path/to/checkstyle-x.x-all.jar -c /path/to/sun_checks.xml -r /path/to/project/src
@@ -23,13 +24,15 @@ tags: [checkstyle, SVN, pre-commit]
 其中將 `/path/to/project/src` 指向你的 Java 工程源码目录即可。
 
 ## 配置 SVN pre-commit 钩子
+
 进入 svnrepo/hooks 目录，將 pre-commit.tmpl 复制一份并重命名为 pre-commit，然后在其 exit 0 这一行前添加执行我写的一个脚本命令：
 
     /path/to/pre-commit-checkstyle.sh $REPOS $TXN 1>&2 || exit 1
 
 **记得给 pre-commit 脚本添加执行权限。**
-<!-- more -->
-``` bash pre-commit-checkstyle.sh - SVN pre-commit Checkstyle
+
+```bash
+pre-commit-checkstyle.sh - SVN pre-commit Checkstyle
 #!/bin/bash
 # Filename: pre-commit-checkstyle.sh
 # Author: zhaqiang
@@ -104,4 +107,4 @@ exit 0
 
  3. [Svn与Checkstyle整合](http://xtony.blog.51cto.com/3964396/811418)
 
-**-EOF-**
+-EOF-

@@ -10,7 +10,7 @@ date: 2015-01-11 10:44
 
 ### Solution
 
-``` ruby
+```ruby
 require 'spreadsheet'
 
 excel = Spreadsheet.open "/path/to/excel.xls"
@@ -27,11 +27,9 @@ end
 
 [spreadsheet](https://github.com/zdavatz/spreadsheet) 文档中有写到：
 
-    To access the values stored in a Row, treat the Row like an Array.
-
-      row[0]
-
-    -> this will return a String, a Float, an Integer, a Formula, a Link or a Date or DateTime object - or nil if the cell is empty.
+> To access the values stored in a Row, treat the Row like an Array.
+> row[0]
+> -> this will return a String, a Float, an Integer, a Formula, a Link or a Date or DateTime object - or nil if the cell is empty.
 
 如果某个单元格内嵌了 hyperlink，`row[i]` 就会直接返回 [Spreadsheet::Link](http://www.rubydoc.info/gems/ruby-spreadsheet/Spreadsheet/Link) class，然后可以通过 `#url` 或 `#href` (url with fragment appended if present) 来获取内嵌的 hyperlink。
 
@@ -49,6 +47,6 @@ Task 本来是要读取一个 xlsx 格式的 Excel，里面是一列几千条的
 
 最终就又切换回使用 spreadsheet 这个 gem，使用 regex 只匹配出 ASCII 字符来去掉乱码。最终进入代码库的 regex：
 
-    /[:\.\/\w\d]+/
+  /[:\.\/\w\d]+/
 
-**-EOF-**
+-EOF-

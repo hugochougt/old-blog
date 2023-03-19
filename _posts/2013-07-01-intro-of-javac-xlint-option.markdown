@@ -21,4 +21,4 @@ tags: [Java, javac]
 
 -Xlint 各个选项的详细作用，请使用`man javac`查阅。
 
-**-EOF-**
+-EOF-
