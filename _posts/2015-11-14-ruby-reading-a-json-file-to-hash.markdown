@@ -10,7 +10,7 @@ Google 后，找到 [Ruby: Reading a .json File to Hash](https://hackhands.com/r
 
 数据示例：
 
-```
+```ruby
 {
   "name": "zhaqiang",
   "job": "Web Developer"
@@ -33,4 +33,4 @@ me["job"]
 => "Web Developer"
 ```
 
-**-EOF-**
+-EOF-

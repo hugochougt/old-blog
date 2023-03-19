@@ -21,4 +21,4 @@ file_path = [Rails.root, "tmp", "xyz-#{foo}-#{bar}-#{Date.today.to_s}.csv"].join
 
 前者的可读性明显比后者好。
 
-**-EOF-**
+-EOF-

@@ -75,7 +75,7 @@ user.first_name
 
 假设有以下模型及关联关系：
 
-```
+```ruby
 # File: app/model/user.rb
 class User < ActiveRecord::Base
   has_many :articles
@@ -89,7 +89,7 @@ end
 
 那么在已经有 user factory 的前提下，可以使用以下简写方式创建 post 的 factory：
 
-```
+```ruby
 FactoryGirl.define do
   factory :post do
     sequence(:title) { |n| "Post title#{n}" }
@@ -100,7 +100,7 @@ end
 
 也可以使用完整的写法关联对应的 factory，同时覆盖一些默认属性：
 
-```
+```ruby
 FactoryGirl.define do
   factory :post do
     sequence(:title) { |n| "Post title#{n}" }
@@ -116,7 +116,7 @@ post.user.last_name # => "Writely"
 
 `transient` 可用来定义临时/假*属性*。用 `transient` 定义的是属性名字。
 
-``` ruby
+```ruby
 FactoryGirl.define do
   factory :user do
     first_name "John"
@@ -142,7 +142,7 @@ create(:user, with_posts: true)
 
 `trait` 是非常实用的、用于 DRY 测试用例数据的方法，在测试过程中必定会用到，其用法有以下几种：
 
-1. 定义特殊用例，例如 `注册了没有但验证邮箱的用户` 、 `被锁定的用户` 。有些测试场景需要用到这些特殊特征的用户时，就可以使用 `trait` 来定义：
+定义特殊用例，例如 `注册了没有但验证邮箱的用户` 、 `被锁定的用户` 。有些测试场景需要用到这些特殊特征的用户时，就可以使用 `trait` 来定义：
 
   ``` ruby
   FactoryGirl.define do
@@ -167,13 +167,13 @@ create(:user, with_posts: true)
   create :user, :locked
   ```
 
-2. 可组合使用：
+可组合使用：
 
-  ```
-  create :user, traits [:unconfirmed, :locked]
-  ```
+```ruby
+create :user, traits [:unconfirmed, :locked]
+```
 
-3. `trait` 可嵌套使用：
+`trait` 可嵌套使用：
 
   ``` ruby
   FactoryGirl.define do
@@ -198,7 +198,7 @@ create(:user, with_posts: true)
   create :user, :zombie
   ```
 
-4. 接受 `transient` 参数，例如有些用例指定“僵尸用户”的注册时间：
+接受 `transient` 参数，例如有些用例指定“僵尸用户”的注册时间：
 
   ``` ruby
   FactoryGirl.define do
@@ -241,4 +241,4 @@ P.S. 首发于 [Beansmile 官方博客](http://beansmile.com/blog)，一周后�
 1. [FactoryGirl Getting Started](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md)
 2. [Cheatsheet for FactoryGirl](http://ricostacruz.com/cheatsheets/factory_girl.html)
 
-**-EOF-**
+-EOF-

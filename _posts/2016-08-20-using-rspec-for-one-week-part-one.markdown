@@ -39,11 +39,8 @@ end
 然后就收到 Rain 的评审批注：
 
 > 这是hacking， 不要直接hack原生的helper方法，而是使用扩展方式，例如这样 `api_post` 或者
-
 > ApiConsumer.config(app_config)
-
 > ApiConsumer.post()
-
 > 建议这样，更方便测试不同的app_config，也可以为将来要做API的SDK做铺垫。
 
 后来 Rain 还为此写了个 mr：
@@ -254,4 +251,4 @@ end
 
 更新说明：本文第一版先发于我自己的 blog，后来修改版本经 CTO Rain 审阅后，发布于 Beansmile 官方 blog：[RSpec 使用一周小结（上篇）](http://www.beansmile.com/blog/posts/using-rspec-for-one-week-part-one)，然后再更新到这里。懂 Git 的读者可以 git log 一下本文的修改情况。
 
-**-EOF-**
+-EOF-

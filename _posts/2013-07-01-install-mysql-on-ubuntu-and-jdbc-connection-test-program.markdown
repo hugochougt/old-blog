@@ -6,6 +6,7 @@ tags: [MySQL, JDBC, Java]
 ---
 
 ## 安装 MySQL
+
 在能联网的情况下，在 Ubuntu 上安装软件可以说是毫无技术含量可言。要安装最新版的 MySQL，在终端里输入以下命令然后输入 root 密码就 OK 了：
     sudo apt-get install mysql-server
 
@@ -14,9 +15,8 @@ tags: [MySQL, JDBC, Java]
 MySQL 的配置优化还请自行 google，因为我也不懂。
 
 ## JDBC 连接测试
-首先下载[Connector/J](http://dev.mysql.com/downloads/connector/j/)，解压之后將其中的`mysql-connector-java-*-bin.jar`添加到 eclipse 工程的 Build Path，然后保存下面的测试程序到 eclipse，并修改 url 变量中的 password 为你安装 MySQL 时设置的密码，运行程序就可以查看 MySQL 的安装是否成功了。
 
-<!-- more -->
+首先下载[Connector/J](http://dev.mysql.com/downloads/connector/j/)，解压之后將其中的`mysql-connector-java-*-bin.jar`添加到 eclipse 工程的 Build Path，然后保存下面的测试程序到 eclipse，并修改 url 变量中的 password 为你安装 MySQL 时设置的密码，运行程序就可以查看 MySQL 的安装是否成功了。
 
 ```java
 package mysql;
@@ -141,7 +141,8 @@ public class MySqlTest {
 ```
 
 ### 参考链接
+
  1. [MySQL安裝指南](http://wiki.ubuntu.org.cn/index.php?title=MySQL%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97&variant=zh-hant)
  2. [Eclipse設定JDBC連接MySQL資料庫](http://blog.yslifes.com/archives/918)
 
- **-EOF-**
+-EOF-

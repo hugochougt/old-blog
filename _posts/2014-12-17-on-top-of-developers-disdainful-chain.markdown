@@ -15,15 +15,15 @@ Ruby on Rails
 
 ### Tools
 
- -  Editor: Vim || Emacs
- -  Indent: space only
- -  Version Control: Git || Mercurial
- -  Shell：Zsh
- -  IM：IRC
- -  Text formatting: LaTeX
- -  Web Server：Nginx
- -  Data Store：Spark
- -  Server deployment: Docker
+- Editor: Vim || Emacs
+- Indent: space only
+- Version Control: Git || Mercurial
+- Shell：Zsh
+- IM：IRC
+- Text formatting: LaTeX
+- Web Server：Nginx
+- Data Store：Spark
+- Server deployment: Docker
 
 ### OS
 
@@ -31,12 +31,12 @@ Mac OS X || Debian
 
 ### Hardware
 
- -  Computer: Raspberry Pi
- -  Keyboard: Dvorak
- -  Chair: NO! Standing desk
+- Computer: Raspberry Pi
+- Keyboard: Dvorak
+- Chair: NO! Standing desk
 
 ### Work
 
 做硬件，写OS，信奉 TDD，不要考证，上班穿休闲服。
 
-**-EOF-**
+-EOF-

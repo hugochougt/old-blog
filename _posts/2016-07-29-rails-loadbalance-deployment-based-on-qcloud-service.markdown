@@ -63,7 +63,6 @@ MySQL 数据库高可用的架构，考虑到一般网站的访问量、对 down
 
 [网络计费说明](https://www.qcloud.com/doc/product/213/%E8%B4%AD%E4%B9%B0%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD)
 
-
 ### 2.2 腾讯云的[云数据库 CDB for MySQL](https://www.qcloud.com/product/cdb.html)
 
 费用：
@@ -109,4 +108,4 @@ MySQL 数据库高可用的架构，考虑到一般网站的访问量、对 down
 
 *P.S. 本文首发于 Beansmile 官方 blog [基于腾讯云服务的 Rails 负载均衡部署方案简介](http://www.beansmile.com/blog/posts/rails-loadbalance-deployment)，一周后发布于我自己的 blog。*
 
-**-EOF-**
+-EOF-

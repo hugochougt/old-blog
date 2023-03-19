@@ -7,25 +7,24 @@ tags: [hadoop, CDH]
 
 在单台机器上部署 CDH 的大致步骤如下：
 
-*   找到一台安装了支持 CDH 的 [OS](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Requirements-and-Supported-Versions/cdhrsv_topic_1.html "Supported OS") 的机器，我是在 Ubuntu 12.04 LTS 上安装的
-*   创建一个普通用户，例如 hadoop
-*   安装并启动 sshd
-*   设置无密码 ssh 登录 localhost
-*   下载并安装 Oracle Java Development Kit (1.6 or later)
-*   下载并解压 CDH 的压缩包 - [CDH Downloads](https://ccp.cloudera.com/display/SUPPORT/CDH+Downloads)，我用的是 hadoop-2.0.0-cdh4.2.0 版本
-*   设置 Hadoop CDH 的配置文件
-*   格式化 Hadoop namenode
-*   启动 Hadoop 服务
-*   检查是否部署成功
+* 找到一台安装了支持 CDH 的 [OS](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Requirements-and-Supported-Versions/cdhrsv_topic_1.html "Supported OS") 的机器，我是在 Ubuntu 12.04 LTS 上安装的
+* 创建一个普通用户，例如 hadoop
+* 安装并启动 sshd
+* 设置无密码 ssh 登录 localhost
+* 下载并安装 Oracle Java Development Kit (1.6 or later)
+* 下载并解压 CDH 的压缩包 - [CDH Downloads](https://ccp.cloudera.com/display/SUPPORT/CDH+Downloads)，我用的是 hadoop-2.0.0-cdh4.2.0 版本
+* 设置 Hadoop CDH 的配置文件
+* 格式化 Hadoop namenode
+* 启动 Hadoop 服务
+* 检查是否部署成功
 
 前面的安装操作系统、创建用户、设置 ssh、安装 JDK 等步骤这里不作说明，本文重点是 CDH 的相关配置。
 
-<!-- more -->
-
 ### 1、配置环境变量
+
 往 ~/.bashrc 文件末尾添加以下内容：
 
-```
+```shell
 # Hadoop CDH env variables
 export HADOOP_PREFIX=${HOME}/Programs/hadoop
 export HADOOP_HOME=${HADOOP_PREFIX}
@@ -50,7 +49,7 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
 
 將 ${HADOOP_CONF_DIR}/core-site.xml 文件修改为以下内容：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
@@ -81,9 +80,10 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
 ```
 
 ### 4、配置 hdfs-site.xml
+
 將 ${HADOOP_CONF_DIR}/hdfs-site.xml 文件修改为以下内容：
 
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
@@ -110,7 +110,7 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
 
 將 ${HADOOP_CONF_DIR}/yarn-site.xml 文件修改为以下内容：
 
-``` xml
+```xml
 <?xml version="1.0"?>
 <configuration>
     <property>
@@ -125,7 +125,7 @@ P.S. 这里假设 CDH 解压在了 ${HOME}/Programs/hadoop 目录中。
 
 在终端(Terminal)中执行以下命令：
 
-```
+```shell
 hadoop namenode -format
 ```
 
@@ -133,26 +133,26 @@ hadoop namenode -format
 
 执行 ${HADOOP_HOME}/sbin 目录下的 start-all.sh 脚本。你可能会留意到 "This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh" 这个信息，在单节点模式下可以忽略这个信息。然后执行一下 `jps` 命令，如果配置正确，应该会有以下5个 Hadoop 的进程：
 
-    NameNode
-    SecondaryNameNode
-    NodeManager
-    DataNode
-    ResourceManager
+  NameNode
+  SecondaryNameNode
+  NodeManager
+  DataNode
+  ResourceManager
 
 ### 8、检查 Hadoop 能否提供正常服务
 
 首先將本地的一个文本文件复制到 HDFS 里：
 
-```
+```shell
 hadoop fs -put <local-file> /input
 ```
 
 然后执行 CDH 自带的 wordcount 示例程序：
 
-```
+```shell
 hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar wordcount /input /output
 ```
 
 如无意外，终端就会显示 “INFO mapreduce.Job: Job job_XXX completed successfully” 的信息。至此，Hadoop CDH 的单节点部署算是成功了。
 
-**-EOF-**
+-EOF-

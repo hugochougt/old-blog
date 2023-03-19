@@ -27,10 +27,10 @@ end
 
 另外就是查阅 API 时还留意到：
 
-   >If you want to validate the presence of a boolean field (where the real values are true and false), you will want to use validates_inclusion_of :field_name, :in => [true, false].
+> If you want to validate the presence of a boolean field (where the real values are true and false), you will want to use validates_inclusion_of :field_name, :in => [true, false].
 
 简单翻译下就是：如果想验证是否提供了布尔值，应该使用 `validates_inclusion_of :field_name, :in => [true, false]`。
 
-原因是 Rails 中 `false.blank?` 返回 true。如果是使用 `validates_presence_of :field_name`，那么当 field_name 被设为 fasle 时，验证就会总是不通过。
+原因是 Rails 中 `false.blank?` 返回 true。如果是使用 `validates_presence_of :field_name`，那么当 `field_name` 被设为 fasle 时，验证就会总是不通过。
 
-**-EOF-**
+-EOF-
