@@ -2,8 +2,7 @@
 layout: post
 title: "MySQL 高可用解决方案简介"
 date: 2014-01-13 20:34
-comments: true
-categories: [MySQL, High Availability]
+tags: [MySQL, High Availability]
 ---
 
 因工作需要近段时间收集并阅读了不少关于 MySQL HA（High Availability，高可用）的资料，现在整理一下做个总结，主要是为自己写的，但同时也希望会对搜索到本文的读者有帮助。

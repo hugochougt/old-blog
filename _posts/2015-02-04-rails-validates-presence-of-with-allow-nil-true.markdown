@@ -2,7 +2,6 @@
 layout: post
 title: "[Rails] 在 validates_presence_of 中使用 :allow_nil => true"
 date: 2015-02-04 21:45
-comments: true
 ---
 
 今天在实现一个当用户 update profile 时必须上传头像的功能，被 CTO review 代码后要求在 `validates_presence_of :avatar, on: :update` 语句后添加 `:allow_nil => true`。当时十分不解，问了 CTO 原因，CTO 解释的大意是如果不使用 `:allow_nil => true`，当用户已经上传了头像，在 edit profile 时就每次都上传头像了。

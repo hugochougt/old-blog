@@ -2,7 +2,6 @@
 layout: post
 title: "Bye 2015"
 date: 2015-12-31 23:45
-comments: true
 ---
 
 又到一年一度的总结的时候了。

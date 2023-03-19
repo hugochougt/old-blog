@@ -2,7 +2,7 @@
 layout: post
 title: "第一次体验了有关大海的运动"
 date: 2016-08-10 21:54
-comments: true
+modified: 2023-03-18
 ---
 
 ![sea-phuket-thailand](/images/posts/sea-phuket-thailand.jpg)
@@ -19,4 +19,4 @@ comments: true
 
 人生第一次冲浪的当天，写于 Sugar Marina Resort-SURF-Kata Beach 酒店内。
 
-**-EOF-**
+-EOF-

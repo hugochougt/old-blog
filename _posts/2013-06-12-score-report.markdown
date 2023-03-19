@@ -2,8 +2,7 @@
 layout: post
 title: "本科成绩"
 date: 2013-06-12 20:52
-comments: true
-categories:
+tags:
 ---
 
 就快要滚粗大学校园了，在这个毕业的季节，贴一下大学本科的获奖荣誉和成绩单吧。
@@ -255,7 +254,7 @@ report['courses'].each do |course|
         point = (score - 45) / 10.0
     end
     $sumOfCredit += credit
-    $sumOfWeightedScore += point * credit 
+    $sumOfWeightedScore += point * credit
 end
 
 print "GPA: ", $sumOfWeightedScore / $sumOfCredit, "\n"

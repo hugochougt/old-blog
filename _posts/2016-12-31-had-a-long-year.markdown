@@ -2,7 +2,6 @@
 layout: post
 title: "2016 辛苦了"
 date: 2016-12-31 17:50
-comments: true
 ---
 
 ## 读书

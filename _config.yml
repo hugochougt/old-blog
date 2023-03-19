@@ -1,26 +1,77 @@
-url: http://zhaqiang.github.io # for production
+# Site settings
+title: Hugo Chou 周昌权
+tagline: A blog to show what I've done and say what I can do
+description: >-
+  Software development consulting, Ruby lang, Ruby on Rails, Web development, productivity, reading notes
+lang: zh-CN
+url: "https://hugochougt.com"
+baseurl: ""
+logo: "/assets/img/logo.png"
+permalink: /:title/
+timezone: Asia/Hong_Kong
+mode: light # theme "dark" | "light"
+date_format: "%b %-d, %Y"
+
+# Profile settings
+author:
+  name: Hugo Chou
+  bio: >-
+    A software engineer with 10+ years of experience in commercial application and software development.
+    I've launched over 20 applications, including iOS and Android apps, WeChat Mini Programs, and Web sites.
+  motto: If you don't write it down, it didn't happen.
+  email: hugochougt@gmail.com
+  avatar: /assets/img/avatar.jpg
+  twitter: hugochougt
+
+google_analytics: G-4ZQ96KH5QY # leave it blank if not wish
+
+# Markdown settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
+
+# Jekyll Compose default front matter
+jekyll_compose:
+  post_default_front_matter:
+    modified:
+    tags: []
+    description:
+  draft_default_front_matter:
+    modified:
+    tags: []
+    description:
+
+# Homepage limit posts
+number_of_posts: 5
 
 # Build settings
-highlighter: rouge
-markdown: kramdown
-permalink: pretty
+sass:
+  style: compressed
 
-# Site settings
-title: "揸枪同学的黑板报"
-description: "If you don't write it down, it didn't happen."
+exclude:
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - CHANGELOG.md
+  - README.md
 
-# email: hugochougt@gmail.com
-# bio: "be nice & be professional & be cool"
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
-links:
-  - name:         About
-    url:          /about
-  - name:         Blog
-    url:          http://zhaqiang.github.io
-    external:     true
-  - name:         Email
-    url:          mailto:hugochougt@gmail.com
-    external:     true
-  - name:         GitHub
-    url:          http://github.com/zhaqiang
-    external:     true
+# SEO
+twitter:
+  username: hugochougt
+  card: summary
+social:
+  name: Hugo Chou
+  links:
+    - https://twitter.com/hugochougt
+    - https://github.com/hugochougt/
+    - https://www.facebook.com/hugochougt/
+    - https://www.instagram.com/hugochougt/
+    - https://www.linkedin.com/in/hugochou/

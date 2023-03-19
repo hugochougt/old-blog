@@ -2,7 +2,6 @@
 layout: post
 title: "Create File Path Variable in Rails"
 date: 2015-06-06 14:32
-comments: true
 ---
 
 最近偶尔需要在 Rails 项目里读取数据库的数据并导出成 csv 文件，code review 的时候 CTO 给我示范了创建文件路径变量的示例，现记录之。

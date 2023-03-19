@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='{{ page.title }} - {{ site.title }}' name='title' />
-    <meta content='{{ page.title }} - {{ site.title }}' name='og:title' />
-    <title>{{ page.title }} - {{ site.title }}</title>
-    {% include head.html %}
-  </head>
-  <body>
-    {% include header.html %}
-    <div id='container'>
-      {% include links.html %}
-      <div class="content">
-          <section class='post'>
-            <h1>{{ page.title }}</h1>
-            {{ content }}
-          </section>
-        </div>
-    </div>
-    {% include footer.html %}
-  </body>
-</html>
+---
+layout: default
+---
+
+<div class="wrapper">
+  <header class="header">
+    <h1 class="header-title center" itemprop="headline">{{ page.title | escape }}</h1>
+  </header>
+
+  <main class="page-content" aria-label="Content">
+    {% include anchor_headings.html html=content anchorClass="anchor-head" beforeHeading=true h_min=4 h_max=4 %}
+  </main>
+</div>

@@ -2,8 +2,7 @@
 layout: post
 title: "用 Checkstyle 进行 SVN 提交的 Java 代码规范检查"
 date: 2013-11-27 21:37
-comments: true
-categories: [checkstyle, SVN, pre-commit]
+tags: [checkstyle, SVN, pre-commit]
 ---
 
 本文主要介绍怎样设置 [Checkstyle](checkstyle.sourceforge.net) 使得向 SVN 提交 Java 代码时进行代码规范检查。
@@ -35,7 +34,7 @@ categories: [checkstyle, SVN, pre-commit]
 # Filename: pre-commit-checkstyle.sh
 # Author: zhaqiang
 # Description: To execute checkstyle of Java source code before
-# svn commit, add following line to svn pre-commit hook before 
+# svn commit, add following line to svn pre-commit hook before
 # exit 0:
 #
 # /path/to/pre-commit-checkstyle.sh $REPOS $TXN 1>&2 || exit 1

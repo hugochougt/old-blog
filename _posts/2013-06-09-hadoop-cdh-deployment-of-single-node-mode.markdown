@@ -2,8 +2,7 @@
 layout: post
 title: "Hadoop CDH 单节点部署"
 date: 2013-06-09 23:13
-comments: true
-categories: [hadoop, CDH]
+tags: [hadoop, CDH]
 ---
 
 在单台机器上部署 CDH 的大致步骤如下：

@@ -2,8 +2,7 @@
 layout: post
 title: "部署 Hadoop HA 和 HBase 集群"
 date: 2013-09-11 21:33
-comments: true
-categories: [Hadoop, HBase, ZooKeeper]
+tags: [Hadoop, HBase, ZooKeeper]
 ---
 
 # 简介
@@ -275,7 +274,7 @@ YARN 的 ResourceManager 配置在172.16.2.143機器上，所以配置如下：
 
  *  172.16.2.141:50070  NameNode
  *  172.16.2.142:50070  NameNode
- *  172.16.2.141:8088   ResourceManager 
+ *  172.16.2.141:8088   ResourceManager
 
 # 部署 HBase
 

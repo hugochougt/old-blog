@@ -2,8 +2,7 @@
 layout: post
 title: "meta_search 的 sort_link 方法没有对数据进行排序"
 date: 2015-05-09 15:36
-categories: [Rails, meta_search, default_scope, to_sql]
-comments: true
+tags: [Rails, meta_search]
 ---
 
 ## 功能需求

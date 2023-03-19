@@ -1,8 +1,7 @@
 ---
 layout: post
-title: "RSpec 使用一周小结（下篇）——使用 FactoryGirl 准备测试数据"
+title: "RSpec 使用一周小结（下）——使用 FactoryGirl 准备测试数据"
 date: 2016-09-30 20:10
-comments: true
 ---
 
 八月下旬发布了 [RSpec 使用一周小结（上篇）](http://www.beansmile.com/blog/posts/using-rspec-for-one-week-part-one)，文末预告了会有下篇介绍使用 FactoryGirl 准备测试数据，现在来了。

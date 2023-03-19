@@ -2,8 +2,7 @@
 layout: post
 title: "Difference between attr_accessor and attr_accessible"
 date: 2015-05-10 11:06
-categories: [Rails, Ruby, attr_accessor, attr_accessible, code review]
-comments: true
+tags: [Rails, Ruby, attr_accessor, attr_accessible, code review]
 ---
 
 某次 code review，CTO 指出某个 field 不能放到 `attr_accessible` 里，因为它是支持 mass-assigment 的，会导致安全问题。直到那个时候，我才留意到原来 attr\_accessible 是不同于 attr\_accessor 的。
