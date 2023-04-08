@@ -1,4 +1,8 @@
-# Personal Blog by Hugo Chou
+# 🏡 hugochougt.com
+
+My home on the web.
+
+## Setup
 
 ```shell
 git clone https://github.com/hugochougt/hugochougt.github.io
