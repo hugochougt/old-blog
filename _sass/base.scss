@@ -1,5 +1,4 @@
 // Fonts preferences
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 $base-font-size: 17px;
 
 $text-base-color: #434648;
@@ -24,7 +23,7 @@ $on-mobile: 768px;
 html { height: 100%; }
 
 body {
-  font-family: "Roboto Mono", monospace, sans-serif;
+  font-family: monospace, sans-serif;
   color: $text-base-color;
   font-size: $base-font-size;
   line-height: 1.4;
