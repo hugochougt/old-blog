@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "第一次体验了有关大海的运动"
+excerpt: 人生第一次在大海冲浪
 date: 2016-08-10 21:54
-modified: 2023-03-18
 ---
 
 ![sea-phuket-thailand](/images/posts/sea-phuket-thailand.jpg)

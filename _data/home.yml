@@ -1,0 +1,25 @@
+entries:
+  - title: About Me
+    entries:
+      - title: 👋 Hi, I am Hugo Chou, and my Chinese name is 周昌权
+      - title: 📝 I write blog posts about topics such as learning, development and traveling
+      - title: 🚀 I've launched over 20 applications, including iOS and Android apps, WeChat Mini Programs, and Web sites
+      - title: 📧 Anything you want to discuss, you can sent me an email to hugochougt@gmail.com
+
+  - title: What's New
+    post_list:
+      limit: 5
+      show_more: true
+      show_more_text: See all posts
+      show_more_url: blog
+
+  - title: Links
+    entries:
+      - title: GitHub
+        url: https://github.com/hugochougt
+      - title: Twitter
+        url: https://twitter.com/hugochougt
+      - title: Instagram
+        url: https://www.instagram.com/hugochougt/
+      - title: RSS
+        url: feed.xml
