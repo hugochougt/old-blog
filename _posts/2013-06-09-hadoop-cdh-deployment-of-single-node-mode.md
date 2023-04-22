@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Hadoop CDH 单节点部署"
+excerpt: Hadoop CDH 单节点部署教程
 date: 2013-06-09 23:13
 tags: [hadoop, CDH]
 ---

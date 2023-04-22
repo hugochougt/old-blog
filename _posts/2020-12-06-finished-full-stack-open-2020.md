@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "历时四个月，完成赫尔辛基大学的 Web 编程课程"
+excerpt: 完成 Deep Dive Into Modern Web Development 课程
 date: 2020-12-06 17:25
 ---
 

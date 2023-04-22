@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "2016 辛苦了"
+excerpt: 2016 年度总结
 date: 2016-12-31 17:50
 ---
 

@@ -1,77 +1,26 @@
 # Site settings
-title: Hugo Chou 周昌权
-tagline: My Home on the Web
-description: >-
-  Software development consulting, Ruby lang, Ruby on Rails, Web development, productivity, reading notes
-lang: zh-CN
-url: "https://hugochougt.com"
+title: Hugo Chou 周昌权 | 🏡 My Home on the Web
+author: Hugo Chou 周昌权
+email: hugochougt@gmail.com
+url: https://hugochougt.com
+repo: https://github.com/hugochougt/hugochougt.github.io
 baseurl: ""
-logo: "/assets/img/logo.png"
-permalink: /:title/
-timezone: Asia/Hong_Kong
-mode: light # theme "dark" | "light"
-date_format: "%b %-d, %Y"
+description: > # description of the site (multiple lines allowed)
+  A software engineer with 10+ years of experience in commercial application and software development. I've launched over 20 applications, including iOS and Android apps, WeChat Mini Programs, and Web sites.
+lang: zh-CN
+permalink: /blog/:title
+google_analytics: G-4ZQ96KH5QY
+date_format: "%Y-%m-%d"
 
-# Profile settings
-author:
-  name: Hugo Chou
-  bio: >-
-    A software engineer with 10+ years of experience in commercial application and software development.
-    I've launched over 20 applications, including iOS and Android apps, WeChat Mini Programs, and Web sites.
-  motto: If you don't write it down, it didn't happen.
-  email: hugochougt@gmail.com
-  avatar: /assets/img/avatar.jpg
-  twitter: hugochougt
-
-google_analytics: G-4ZQ96KH5QY # leave it blank if not wish
-
-# Markdown settings
 markdown: kramdown
 highlighter: rouge
 kramdown:
   syntax_highlighter: rouge
 
-# Jekyll Compose default front matter
-jekyll_compose:
-  post_default_front_matter:
-    modified:
-    tags: []
-    description:
-  draft_default_front_matter:
-    modified:
-    tags: []
-    description:
-
-# Homepage limit posts
-number_of_posts: 5
-
-# Build settings
 sass:
   style: compressed
 
-exclude:
-  - CNAME
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - CHANGELOG.md
-  - README.md
-
-# Plugins
 plugins:
   - jekyll-feed
-  - jekyll-sitemap
   - jekyll-seo-tag
-
-# SEO
-twitter:
-  username: hugochougt
-  card: summary
-social:
-  name: Hugo Chou
-  links:
-    - https://twitter.com/hugochougt
-    - https://github.com/hugochougt/
-    - https://www.facebook.com/hugochougt/
-    - https://www.instagram.com/hugochougt/
-    - https://www.linkedin.com/in/hugochou/
+  - jekyll-sitemap

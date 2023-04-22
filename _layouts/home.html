@@ -2,8 +2,8 @@
 layout: default
 ---
 
-<div class="wrapper">
-  <main aria-label="Content">
-    {{ content }}
-  </main>
-</div>
+<header>
+  <h1>{{ site.author }}</h1>
+</header>
+
+{%- include menu_item.html collection=site.data.home.entries -%}
