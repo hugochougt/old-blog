@@ -5,11 +5,10 @@ email: hugochougt@gmail.com
 url: https://hugochougt.com
 repo: https://github.com/hugochougt/hugochougt.github.io
 baseurl: ""
-description: > # description of the site (multiple lines allowed)
+description: >
   A software engineer with 10+ years of experience in commercial application and software development. I've launched over 20 applications, including iOS and Android apps, WeChat Mini Programs, and Web sites.
 lang: zh-CN
 permalink: /blog/:title
-google_analytics: G-4ZQ96KH5QY
 date_format: "%Y-%m-%d"
 
 markdown: kramdown

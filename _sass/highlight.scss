@@ -1,3 +1,17 @@
+code.highlighter-rouge {
+  padding: 1px 3px;
+  background-color: #f6f6f6;
+  border-radius: 6px;
+  border: 1px solid rgba(128,128,128,0.1);
+}
+
+div.highlighter-rouge code {
+  display: block;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  padding: 1rem;
+}
+
 .highlight .hll { background-color: #515151 }
 .highlight  { background: #1A1F35; color: #f2f0ec }
 .highlight .c { color: #747369 } /* Comment */
