@@ -1,8 +1,7 @@
 ---
 layout: post
-title: "本科成绩"
+title: 本科成绩
 date: 2013-06-12 20:52
-tags:
 ---
 
 就快要滚粗大学校园了，在这个毕业的季节，贴一下大学本科的获奖荣誉和成绩单吧。
@@ -231,7 +230,7 @@ courses:
    credit: 1.0
 ```
 
-为什么我要用 yaml 格式来保存？因为GPA 是由下面的 ruby 程序计算出来的：
+为什么我要用 yaml 格式来保存？因为GPA 是由下面的 Ruby 程序计算出来的：
 
 ```ruby
 # GPA calculator of HDU

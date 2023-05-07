@@ -2,13 +2,11 @@
 layout: default
 ---
 
-{%- include back_link.html -%}
+{% include navbar.html %}
 
-<article class="post">
-  <h1>{{ page.title }}</h1>
-  <p class="post-meta">
-    <time datetime="{{ page.date }}">{{ page.date | date: site.date_format }}</time>
-  </p>
-
-  {{ content }}
-</article>
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">{{ page.title }}</h1>
+  <article class="py-1">
+    {{ content }}
+  </article>
+</div>
