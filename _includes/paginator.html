@@ -1,0 +1,34 @@
+<div class="flex flex-col items-center mt-6">
+  <!-- Help text -->
+  <div class="text-sm py-2 text-gray-700 dark:text-gray-400">
+    Showing page <span class="font-semibold text-gray-900 dark:text-white">{{  paginator.page  }}</span> of <span
+      class="font-semibold text-gray-900 dark:text-white">{{ paginator.total_pages }}</span> pages
+  </div>
+
+  <div class="inline-flex my-2 xs:mt-0">
+    {% if paginator.previous_page %}
+    <a class="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      href="{{ paginator.previous_page_path }}">
+      Prev
+    </a>
+    {% else %}
+    <button
+      class="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l focus:outline-none disabled:opacity-75"
+      disabled>
+      Prev
+    </button>
+    {% endif %}
+    {% if paginator.next_page %}
+    <a class="px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      href="{{ paginator.next_page_path }}">
+      Next
+    </a>
+    {% else %}
+    <button
+      class="px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r focus:outline-none disabled:opacity-75"
+      disabled>
+      Next
+    </button>
+    {% endif %}
+  </div>
+</div>

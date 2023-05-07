@@ -1,0 +1,16 @@
+- name: "GitHub"
+  link: "https://github.com/hugochougt"
+  icon: "https://simpleicons.org/icons/github.svg"
+  weight: 1
+- name: "Twitter"
+  link: "https://twitter.com/hugochougt"
+  icon: "https://simpleicons.org/icons/twitter.svg"
+  weight: 2
+- name: "Gmail"
+  link: "mailto:hugochougt@gmail.com"
+  icon: "https://simpleicons.org/icons/gmail.svg"
+  weight: 3
+- name: "Instagram"
+  link: "https://www.instagram.com/hugochougt"
+  icon: "https://simpleicons.org/icons/instagram.svg"
+  weight: 4

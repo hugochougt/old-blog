@@ -1,25 +1,77 @@
 # Site settings
-title: Hugo Chou 周昌权 | 🏡 My Home on the Web
-author: Hugo Chou 周昌权
-email: hugochougt@gmail.com
-url: https://hugochougt.com
-repo: https://github.com/hugochougt/hugochougt.github.io
-baseurl: ""
-description: >
-  A software engineer with 10+ years of experience in commercial application and software development. I've launched over 20 applications, including iOS and Android apps, WeChat Mini Programs, and Web sites.
 lang: zh-CN
-permalink: /blog/:title
-date_format: "%Y-%m-%d"
+title: Hugo Chou 周昌权
+tagline: Learn. Write. Share. Repeat.
+email: hugochougt@gmail.com
+description: Experienced software engineer with 10+ years in commercial app & software dev. Launched 20+ apps incl. iOS/Android, WeChat Mini Programs & websites
+baseurl: ""
+url: https://hugochougt.com
+date_format: "%b %d, %Y"
+repo: https://github.com/hugochougt/hugochougt.github.io
+permalink: /:categories/:title
+number_of_posts: 5
 
+# SEO
+author:
+  name: Hugo Chou
+  url: https://hugochougt.com
+  twitter: hugochougt
+  picture: /assets/images/avatar.jpg
+  bio: Experienced software engineer with 10+ years in commercial app & software dev. Launched 20+ apps incl. iOS/Android, WeChat Mini Programs & websites.
+twitter:
+  username: hugochougt
+  card: summary
+logo: /assets/images/logo.png
+social:
+  name: Hugo Chou 周昌权
+  links:
+    - https://twitter.com/hugochougt
+    - https://www.facebook.com/hugochougt
+    - https://github.com/hugochougt
+    - https://www.instagram.com/hugochougt
+
+# Build settings
 markdown: kramdown
-highlighter: rouge
-kramdown:
-  syntax_highlighter: rouge
-
-sass:
-  style: compressed
-
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-postcss
+
+postcss:
+  cache: false
+
+feed:
+  path: atom.xml
+
+# Pagination - https://jekyllrb.com/docs/pagination/
+paginate: 10
+paginate_path: /blog/page:num/
+
+# Exclude from processing.
+exclude:
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - package.json
+  - package-lock.json
+  - postcss.config.js
+  - tailwind.config.js
+
+# Front Matter Defaults
+defaults:
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: post
+      category: blog
+  - scope:
+      path: "_projects"
+      type: posts
+    values:
+      layout: post
+      category: projects
