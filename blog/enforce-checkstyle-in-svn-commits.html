@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>用 Checkstyle 进行 SVN 提交的 Java 代码规范检查 | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="用 Checkstyle 进行 SVN 提交的 Java 代码规范检查" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="本文主要介绍怎样设置 Checkstyle 使得向 SVN 提交 Java 代码时进行代码规范检查。" />
+<meta property="og:description" content="本文主要介绍怎样设置 Checkstyle 使得向 SVN 提交 Java 代码时进行代码规范检查。" />
+<link rel="canonical" href="https://hugochougt.com/blog/enforce-checkstyle-in-svn-commits" />
+<meta property="og:url" content="https://hugochougt.com/blog/enforce-checkstyle-in-svn-commits" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-11-27T21:37:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="用 Checkstyle 进行 SVN 提交的 Java 代码规范检查" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2013-11-27T21:37:00+00:00","datePublished":"2013-11-27T21:37:00+00:00","description":"本文主要介绍怎样设置 Checkstyle 使得向 SVN 提交 Java 代码时进行代码规范检查。","headline":"用 Checkstyle 进行 SVN 提交的 Java 代码规范检查","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/enforce-checkstyle-in-svn-commits"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/enforce-checkstyle-in-svn-commits"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">用 Checkstyle 进行 SVN 提交的 Java 代码规范检查</h1>
+  <article class="py-1">
+    <p>本文主要介绍怎样设置 <a href="checkstyle.sourceforge.net">Checkstyle</a> 使得向 SVN 提交 Java 代码时进行代码规范检查。</p>
+
+<h2 id="安装-checkstyle">安装 Checkstyle</h2>
+
+<p>到 Checkstyle 的<a href="http://sourceforge.net/projects/checkstyle/files/checkstyle">下载页面</a>选择你需要的版本下载，一般都是选最新版，然后解压。对我们有用的是 checkstyle-x.x-all.jar 这个 jar 包。</p>
+
+<h2 id="配置-checkstyle-检查规则">配置 Checkstyle 检查规则</h2>
+
+<p>在上一步下载的压缩包里，有一个 sun_xhecks.xml 的文件，结合 Checkstyle 的配置说明文档將其修改成适合你的项目的规则。</p>
+
+<h2 id="测试-checkstyle">测试 Checkstyle</h2>
+
+<p>运行 Checkstyle 需要 JRE 的运行环境，请预先准备好。这里不赘述。运行以下命令进行测试：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ java -jar /path/to/checkstyle-x.x-all.jar -c /path/to/sun_checks.xml -r /path/to/project/src
+</code></pre></div></div>
+
+<p>其中將 <code class="language-plaintext highlighter-rouge">/path/to/project/src</code> 指向你的 Java 工程源码目录即可。</p>
+
+<h2 id="配置-svn-pre-commit-钩子">配置 SVN pre-commit 钩子</h2>
+
+<p>进入 svnrepo/hooks 目录，將 pre-commit.tmpl 复制一份并重命名为 pre-commit，然后在其 exit 0 这一行前添加执行我写的一个脚本命令：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/path/to/pre-commit-checkstyle.sh $REPOS $TXN 1&gt;&amp;2 || exit 1
+</code></pre></div></div>
+
+<p><strong>记得给 pre-commit 脚本添加执行权限。</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pre-commit-checkstyle.sh - SVN pre-commit Checkstyle
+<span class="c">#!/bin/bash</span>
+<span class="c"># Filename: pre-commit-checkstyle.sh</span>
+<span class="c"># Author: zhaqiang</span>
+<span class="c"># Description: To execute checkstyle of Java source code before</span>
+<span class="c"># svn commit, add following line to svn pre-commit hook before</span>
+<span class="c"># exit 0:</span>
+<span class="c">#</span>
+<span class="c"># /path/to/pre-commit-checkstyle.sh $REPOS $TXN 1&gt;&amp;2 || exit 1</span>
+<span class="c">#</span>
+
+<span class="nv">repoPath</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">txnName</span><span class="o">=</span><span class="nv">$2</span>
+
+<span class="nv">currPath</span><span class="o">=</span><span class="sb">`</span><span class="nb">dirname</span> <span class="nv">$0</span><span class="sb">`</span>
+<span class="nv">currPath</span><span class="o">=</span><span class="sb">`</span><span class="nb">cd</span> <span class="k">${</span><span class="nv">currPath</span><span class="k">}</span> <span class="p">;</span> <span class="nb">pwd</span><span class="sb">`</span>
+
+<span class="nv">checkstyleJar</span><span class="o">=</span>/path/to/chechstyle.jar
+<span class="nv">checkstyleXml</span><span class="o">=</span>/path/to/styelchecks.xml
+
+<span class="nv">tmpDir</span><span class="o">=</span><span class="k">${</span><span class="nv">currPath</span><span class="k">}</span>/temp
+<span class="o">[</span> <span class="nt">-d</span> <span class="k">${</span><span class="nv">tmpDir</span><span class="k">}</span> <span class="o">]</span> <span class="o">||</span> <span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nt">-m</span> 777 <span class="k">${</span><span class="nv">tmpDir</span><span class="k">}</span> 2&gt;/dev/null
+
+<span class="c"># 1. filter added or updated Java files from files changed</span>
+<span class="nv">javaFile</span><span class="o">=</span><span class="sb">`</span>svnlook changed <span class="nt">-t</span> <span class="k">${</span><span class="nv">txnName</span><span class="k">}</span> <span class="k">${</span><span class="nv">repoPath</span><span class="k">}</span> | <span class="nb">awk</span> <span class="s1">'/^[AU].*\.java/ {print $2}'</span><span class="sb">`</span>
+
+<span class="c"># exit successfully when there is no Java file changed</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"X</span><span class="k">${</span><span class="nv">javaFile</span><span class="k">}</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"X"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then
+    </span><span class="nb">exit </span>0
+<span class="k">fi
+
+</span><span class="nv">tmpWorkspace</span><span class="o">=</span><span class="k">${</span><span class="nv">tmpDir</span><span class="k">}</span>/work.<span class="nv">$$</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nt">-m</span> 777 <span class="k">${</span><span class="nv">tmpWorkspace</span><span class="k">}</span>
+
+<span class="c"># 2. copy committed Java source code to a tmp workspace</span>
+<span class="k">for </span>file <span class="k">in</span> <span class="k">${</span><span class="nv">javaFile</span><span class="k">}</span> <span class="p">;</span> <span class="k">do
+    </span><span class="nv">targetFile</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">tmpWorkspace</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">file</span><span class="k">}</span><span class="s2">"</span>
+    <span class="nv">targetDir</span><span class="o">=</span><span class="sb">`</span><span class="nb">dirname</span> <span class="nv">$0</span><span class="sb">`</span>
+
+    <span class="o">[</span> <span class="nt">-d</span> <span class="k">${</span><span class="nv">targetDir</span><span class="k">}</span> <span class="o">]</span> <span class="o">||</span> <span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nt">-m</span> 777 <span class="k">${</span><span class="nv">targetDir</span><span class="k">}</span>
+    svnlook <span class="nb">cat</span> <span class="nt">-t</span> <span class="k">${</span><span class="nv">txnName</span><span class="k">}</span> <span class="k">${</span><span class="nv">repoPath</span><span class="k">}</span> <span class="o">&gt;</span> <span class="k">${</span><span class="nv">targetFile</span><span class="k">}</span>
+<span class="k">done</span>
+
+<span class="c"># 3. execute checkstyle</span>
+<span class="nv">checkstyleLog</span><span class="o">=</span><span class="k">${</span><span class="nv">tmpDir</span><span class="k">}</span>/tmp<span class="nv">$$</span>.log
+java <span class="nt">-jar</span> <span class="k">${</span><span class="nv">checkstyleJar</span><span class="k">}</span> <span class="nt">-c</span> <span class="k">${</span><span class="nv">checkstyleXml</span><span class="k">}</span> <span class="nt">-r</span> <span class="k">${</span><span class="nv">tmpWorkspace</span><span class="k">}</span> <span class="o">&gt;</span> <span class="k">${</span><span class="nv">checkstyleLog</span><span class="k">}</span>
+
+<span class="c"># 4. check and print result of checkstyle</span>
+<span class="nv">lineNum</span><span class="o">=</span><span class="sb">`</span><span class="nb">sed</span> <span class="nt">-n</span> <span class="s1">'$='</span> <span class="k">${</span><span class="nv">checkstyleLog</span><span class="k">}</span><span class="sb">`</span>
+<span class="nv">regex</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">tmpWorkspace</span><span class="k">}</span> | <span class="nb">sed</span> <span class="s1">'s#\/#\\\/#g'</span><span class="sb">`</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"X</span><span class="k">${</span><span class="nv">lineNum</span><span class="k">}</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"X2"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Checkstyle errors:"</span>
+    <span class="nb">sed</span> <span class="s2">"s/</span><span class="k">${</span><span class="nv">regex</span><span class="k">}</span><span class="s2">//"</span> <span class="k">${</span><span class="nv">checkstyleLog</span><span class="k">}</span>
+    <span class="nb">rm</span> <span class="nt">-rf</span> <span class="k">${</span><span class="nv">tmpWorkspace</span><span class="k">}</span> <span class="k">${</span><span class="nv">checkstyleLog</span><span class="k">}</span> <span class="c"># clean up</span>
+    <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="c"># 5. clean up</span>
+<span class="nb">rm</span> <span class="nt">-rf</span> <span class="k">${</span><span class="nv">tmpWorkspace</span><span class="k">}</span> <span class="k">${</span><span class="nv">checkstyleLog</span><span class="k">}</span>
+
+<span class="nb">echo</span> <span class="s2">"Checkstyle done without errors."</span>
+
+<span class="nb">exit </span>0
+</code></pre></div></div>
+
+<p>根据你的安装配置修改 <code class="language-plaintext highlighter-rouge">checkstyleJar</code> 和 <code class="language-plaintext highlighter-rouge">checkstyleXml</code> 两个变量的位置即可。这个脚本会对提交至 SVN 的新增(Added)和更新(Updated)的 Java 文件进行 Checkstyle 检查，其他后缀名的文件不予理会。</p>
+
+<p>参考文献：</p>
+
+<ol>
+  <li>
+    <p><a href="http://www.iamjk.com/2009/06/how-to-enforce-checkstyle-in-svn.html">How to enforce Checkstyle in SVN commits : Simple Guide</a></p>
+  </li>
+  <li>
+    <p><a href="http://tech.it168.com/a2011/0608/1201/000001201666.shtml">用checkstyle实现svn的代码规范性检查</a></p>
+  </li>
+  <li>
+    <p><a href="http://xtony.blog.51cto.com/3964396/811418">Svn与Checkstyle整合</a></p>
+  </li>
+</ol>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

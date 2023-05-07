@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>ChatGPT Prompt 咒语吟唱入门 | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="ChatGPT Prompt 咒语吟唱入门" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="网上有很多人分享 ChatGPT 的 prompt 模板，也有很多人通过视频来介绍 ChatGPT。但是如果不从根本上理解如何清晰、有效地给 ChatGPT 提 prompt，就不能高效地修改、应用这些模板，来满足自己的特殊需求。" />
+<meta property="og:description" content="网上有很多人分享 ChatGPT 的 prompt 模板，也有很多人通过视频来介绍 ChatGPT。但是如果不从根本上理解如何清晰、有效地给 ChatGPT 提 prompt，就不能高效地修改、应用这些模板，来满足自己的特殊需求。" />
+<link rel="canonical" href="https://hugochougt.com/blog/chatgpt-prompt-engineering-intro" />
+<meta property="og:url" content="https://hugochougt.com/blog/chatgpt-prompt-engineering-intro" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-03-25T21:24:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ChatGPT Prompt 咒语吟唱入门" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2023-03-25T21:24:00+00:00","datePublished":"2023-03-25T21:24:00+00:00","description":"网上有很多人分享 ChatGPT 的 prompt 模板，也有很多人通过视频来介绍 ChatGPT。但是如果不从根本上理解如何清晰、有效地给 ChatGPT 提 prompt，就不能高效地修改、应用这些模板，来满足自己的特殊需求。","headline":"ChatGPT Prompt 咒语吟唱入门","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/chatgpt-prompt-engineering-intro"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/chatgpt-prompt-engineering-intro"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">ChatGPT Prompt 咒语吟唱入门</h1>
+  <article class="py-1">
+    <p>网上有很多人分享 ChatGPT 的 prompt 模板，也有很多人通过视频来介绍 ChatGPT。但是如果不从根本上理解如何清晰、有效地给 ChatGPT 提 prompt，就不能高效地修改、应用这些模板，来满足自己的特殊需求。</p>
+
+<p>要理解 prompt 咒语吟唱，首选的起点是查阅官方的 3 个在线文档：</p>
+
+<ol>
+  <li><a href="https://platform.openai.com/docs/guides/completion/introduction">Text completion</a></li>
+  <li><a href="https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api">Best practices for prompt engineering with OpenAI API</a></li>
+  <li><a href="https://platform.openai.com/examples">Examples</a></li>
+</ol>
+
+<p>以下内容是我根据官方的文档，结合自己的实际操作做的一些简单入门总结。</p>
+
+<h2 id="吟唱咒语prompt的两个基本准则">吟唱咒语（Prompt）的两个基本准则</h2>
+
+<ol>
+  <li>清晰地表达您的需求，通过指令、示例或两者结合向 ChatGPT 展示您想要的结果；</li>
+  <li>提供高质量的数据和准确的文字（不要有错别字），确保有足够的示例，并对示例进行校对。</li>
+</ol>
+
+<h2 id="建议和示例">建议和示例</h2>
+
+<h3 id="1-先在咒语prompt的开头描述指令然后用--或--隔开指令和上下文">1. 先在咒语（Prompt）的开头描述指令，然后用 <code class="language-plaintext highlighter-rouge">###</code> 或 <code class="language-plaintext highlighter-rouge">"""</code> 隔开指令和上下文</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总结以下内容的重点
+
+Text: ###
+{多段文本内容}
+###
+</code></pre></div></div>
+
+<h3 id="2-尽可能具体详细地描述期望的内容包括结果长度格式文风等">2. 尽可能具体、详细地描述期望的内容，包括结果、长度、格式、文风等</h3>
+
+<p>不建议❌：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>以《登高》为标写一首诗。
+</code></pre></div></div>
+
+<p>建议✅：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>以哀愁的口吻写一首七言唐诗，标题为《登高》，风格参考唐代诗人杜甫。
+</code></pre></div></div>
+
+<p>两个咒语的输出对比：</p>
+
+<p><img src="/images/posts/chatgpt-prompt/promtp-with-comparison.png" alt="promtp-with-comparison" /></p>
+
+<h2 id="3-通过示例阐述期望的输出格式">3. 通过示例阐述期望的输出格式</h2>
+
+<p>不建议❌：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>提取以下内容的名字和门店名称
+
+Text: {text}
+</code></pre></div></div>
+
+<p>建议✅：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>提取以下内容的名字和门店名称，以 Excel 表格输出
+
+Excel 表头格式：序号、门店名称、名字
+
+Text: ###
+{多行文本}
+###
+</code></pre></div></div>
+
+<p>下面截图示例的数据是我的一个朋友让我帮忙处理 100 多条不规则的文件名数据。</p>
+
+<p><img src="/images/posts/chatgpt-prompt/prompt-with-output-format.png" alt="prompt-with-output-format" /></p>
+
+<h2 id="4-减少空洞和不准确的描述">4. 减少“空洞”和不准确的描述</h2>
+
+<p>不建议❌：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>产品的描述应该相当简短，仅需几句话，不要太多文字。
+</code></pre></div></div>
+
+<p>建议✅：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>用 3 到 5 句话来描述产品。
+</code></pre></div></div>
+
+<p>更多咒语示例，可以查阅以下链接：</p>
+
+<ul>
+  <li><a href="https://flowgpt.com/">FlowGPT</a></li>
+  <li><a href="https://prompts.fresns.cn/">ChatGPT 提示语</a></li>
+  <li><a href="https://github.com/f/awesome-chatgpt-prompts">awesome-chatgpt-prompts</a></li>
+</ul>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

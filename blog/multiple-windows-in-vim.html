@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Vim 多窗口基本操作 | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Vim 多窗口基本操作" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="从命令行打开多个文件时就为每个文件分配一个窗口，使用 -o（horizontally，横排） 或 -O（vertically，竖排）参数：" />
+<meta property="og:description" content="从命令行打开多个文件时就为每个文件分配一个窗口，使用 -o（horizontally，横排） 或 -O（vertically，竖排）参数：" />
+<link rel="canonical" href="https://hugochougt.com/blog/multiple-windows-in-vim" />
+<meta property="og:url" content="https://hugochougt.com/blog/multiple-windows-in-vim" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2014-06-21T15:35:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Vim 多窗口基本操作" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2014-06-21T15:35:00+00:00","datePublished":"2014-06-21T15:35:00+00:00","description":"从命令行打开多个文件时就为每个文件分配一个窗口，使用 -o（horizontally，横排） 或 -O（vertically，竖排）参数：","headline":"Vim 多窗口基本操作","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/multiple-windows-in-vim"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/multiple-windows-in-vim"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">Vim 多窗口基本操作</h1>
+  <article class="py-1">
+    <p>从命令行打开多个文件时就为每个文件分配一个窗口，使用 <code class="language-plaintext highlighter-rouge">-o</code>（horizontally，横排） 或 <code class="language-plaintext highlighter-rouge">-O</code>（vertically，竖排）参数：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ vim -o file1 file2
+$ vim -O file1 file3
+</code></pre></div></div>
+
+<p>在编辑文件的时候打开新的窗口使用 <code class="language-plaintext highlighter-rouge">:split</code> 或 <code class="language-plaintext highlighter-rouge">:vsplit</code> 命令。</p>
+
+<p>在窗口间移动：<code class="language-plaintext highlighter-rouge">CTRL-W</code> + 上下左右，<code class="language-plaintext highlighter-rouge">CTRL-W CTRL-W</code> 移动到下一个窗口。</p>
+
+<p>移动窗口：<code class="language-plaintext highlighter-rouge">CTRL-W</code> + 大写的 HJKL。</p>
+
+<p>Resize:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">CTRL-W =</code> 將所有窗口变成同样的大小</li>
+  <li><code class="language-plaintext highlighter-rouge">CTRL-W -n</code> 將当前窗口减小 n 行。同理，<code class="language-plaintext highlighter-rouge">+</code> 增加 n 行（<code class="language-plaintext highlighter-rouge">:resize +n</code> 有同样的效果）</li>
+  <li><code class="language-plaintext highlighter-rouge">CTRL-W &lt;</code> 和 <code class="language-plaintext highlighter-rouge">CTRL-W &gt;</code> 分别减少和增加窗口的宽度</li>
+</ul>
+
+<p>以上的 Vim 操作足够应付多数情况下的多窗口操作需求了。</p>
+
+<p>本文内容参考自 <a href="http://book.douban.com/subject/3041178/">Learning the vi and Vim Editors</a>, page 174-186</p>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

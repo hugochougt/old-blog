@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[Rails] 在 Ajax 中渲染错误信息 | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="[Rails] 在 Ajax 中渲染错误信息" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="在最近的开发中，越来越多地使用 Ajax 来提交表单输入。一涉及到表单输入，肯定要处理错误情况，并给用户反馈适当的纠正信息。之前一直不知道如何正确处理 Ajax 错误请求。经过一番搜索后，整理下自己认为较为正确的做法。" />
+<meta property="og:description" content="在最近的开发中，越来越多地使用 Ajax 来提交表单输入。一涉及到表单输入，肯定要处理错误情况，并给用户反馈适当的纠正信息。之前一直不知道如何正确处理 Ajax 错误请求。经过一番搜索后，整理下自己认为较为正确的做法。" />
+<link rel="canonical" href="https://hugochougt.com/blog/rendering-errors-in-json-with-rails" />
+<meta property="og:url" content="https://hugochougt.com/blog/rendering-errors-in-json-with-rails" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-08-05T23:23:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[Rails] 在 Ajax 中渲染错误信息" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2015-08-05T23:23:00+00:00","datePublished":"2015-08-05T23:23:00+00:00","description":"在最近的开发中，越来越多地使用 Ajax 来提交表单输入。一涉及到表单输入，肯定要处理错误情况，并给用户反馈适当的纠正信息。之前一直不知道如何正确处理 Ajax 错误请求。经过一番搜索后，整理下自己认为较为正确的做法。","headline":"[Rails] 在 Ajax 中渲染错误信息","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/rendering-errors-in-json-with-rails"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/rendering-errors-in-json-with-rails"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">[Rails] 在 Ajax 中渲染错误信息</h1>
+  <article class="py-1">
+    <p>在最近的开发中，越来越多地使用 Ajax 来提交表单输入。一涉及到表单输入，肯定要处理错误情况，并给用户反馈适当的纠正信息。之前一直不知道如何正确处理 Ajax 错误请求。经过一番搜索后，整理下自己认为较为正确的做法。</p>
+
+<p>先给出常见的错误做法：</p>
+
+<p>JavaScript:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nf">ajax</span><span class="p">({</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/xxxx</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">dataType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+    <span class="nf">if</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// show error messages</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="c1">// show successful messages</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Controller:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create</span>
+  <span class="vi">@model</span> <span class="o">=</span> <span class="no">Model</span><span class="p">.</span><span class="nf">new</span> <span class="n">model_params</span>
+  <span class="k">if</span> <span class="vi">@model</span><span class="p">.</span><span class="nf">save</span>
+    <span class="n">render</span> <span class="ss">json: </span><span class="vi">@model</span>
+  <span class="k">else</span>
+    <span class="n">render</span> <span class="ss">json: </span><span class="p">{</span> <span class="ss">errors: </span><span class="vi">@model</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">full_messages</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>这种做法的问题所在是没有使用 HTTP 的错误状态码来表示数据有问题，这样就需要把错误信息嵌在成功的响应中返回，导致 JS 代码多了一个 if 分支来判断是否有错误信息。</p>
+
+<p><strong>正确的做法如下</strong>：</p>
+
+<p>JavaScript:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nf">ajax</span><span class="p">({</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/xxxx</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">dataType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+    <span class="c1">// show successful messages</span>
+  <span class="p">},</span>
+  <span class="na">error</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">errors</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nf">parseJSON</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">).</span><span class="nx">errors</span>
+    <span class="c1">// show error messages</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Controller:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create</span>
+  <span class="vi">@model</span> <span class="o">=</span> <span class="no">Model</span><span class="p">.</span><span class="nf">new</span> <span class="n">model_params</span>
+  <span class="k">if</span> <span class="vi">@model</span><span class="p">.</span><span class="nf">save</span>
+    <span class="n">render</span> <span class="ss">json: </span><span class="vi">@model</span>
+  <span class="k">else</span>
+    <span class="n">render</span> <span class="ss">json: </span><span class="p">{</span> <span class="ss">errors: </span><span class="vi">@model</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">full_messages</span> <span class="p">},</span> <span class="ss">status: </span><span class="mi">4</span><span class="n">xx</span> <span class="sr">//</span> <span class="err">使用符合错误信息的状态码</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

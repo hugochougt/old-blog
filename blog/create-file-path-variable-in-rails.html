@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Create File Path Variable in Rails | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Create File Path Variable in Rails" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="最近偶尔需要在 Rails 项目里读取数据库的数据并导出成 csv 文件，code review 的时候 CTO 给我示范了创建文件路径变量的示例，现记录之。" />
+<meta property="og:description" content="最近偶尔需要在 Rails 项目里读取数据库的数据并导出成 csv 文件，code review 的时候 CTO 给我示范了创建文件路径变量的示例，现记录之。" />
+<link rel="canonical" href="https://hugochougt.com/blog/create-file-path-variable-in-rails" />
+<meta property="og:url" content="https://hugochougt.com/blog/create-file-path-variable-in-rails" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-06-06T14:32:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Create File Path Variable in Rails" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2015-06-06T14:32:00+00:00","datePublished":"2015-06-06T14:32:00+00:00","description":"最近偶尔需要在 Rails 项目里读取数据库的数据并导出成 csv 文件，code review 的时候 CTO 给我示范了创建文件路径变量的示例，现记录之。","headline":"Create File Path Variable in Rails","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/create-file-path-variable-in-rails"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/create-file-path-variable-in-rails"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">Create File Path Variable in Rails</h1>
+  <article class="py-1">
+    <p>最近偶尔需要在 Rails 项目里读取数据库的数据并导出成 csv 文件，code review 的时候 CTO 给我示范了创建文件路径变量的示例，现记录之。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Good :)</span>
+<span class="n">file_name</span> <span class="o">=</span> <span class="s2">"xyz-</span><span class="si">#{</span><span class="n">foo</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="n">bar</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="no">Date</span><span class="p">.</span><span class="nf">today</span><span class="si">}</span><span class="s2">.csv"</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"tmp"</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>以下是被 code review 前我的写法：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Bad :(</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="p">[</span><span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="p">,</span> <span class="s2">"tmp"</span><span class="p">,</span> <span class="s2">"xyz-</span><span class="si">#{</span><span class="n">foo</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="n">bar</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="no">Date</span><span class="p">.</span><span class="nf">today</span><span class="p">.</span><span class="nf">to_s</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">].</span><span class="nf">join</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>前者的可读性明显比后者好。</p>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

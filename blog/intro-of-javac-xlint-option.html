@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>javac -Xlint 编译选项简介 | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="javac -Xlint 编译选项简介" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="在看《JAVA 核心技术 卷I：基础知识》第11章《异常、日志、断言和调试》的时候，看到了有关 javac -Xlint 的内容，以前初学 Java 的时候，在命令行编译时经常会看到使用 javac -Xlint 重新编译的提示，但是当时又不理解，只是根据提示照做而已。现在看到相关介绍，就整理摘录下，以免日后又忘记了。" />
+<meta property="og:description" content="在看《JAVA 核心技术 卷I：基础知识》第11章《异常、日志、断言和调试》的时候，看到了有关 javac -Xlint 的内容，以前初学 Java 的时候，在命令行编译时经常会看到使用 javac -Xlint 重新编译的提示，但是当时又不理解，只是根据提示照做而已。现在看到相关介绍，就整理摘录下，以免日后又忘记了。" />
+<link rel="canonical" href="https://hugochougt.com/blog/intro-of-javac-xlint-option" />
+<meta property="og:url" content="https://hugochougt.com/blog/intro-of-javac-xlint-option" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-07-01T23:07:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="javac -Xlint 编译选项简介" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2013-07-01T23:07:00+00:00","datePublished":"2013-07-01T23:07:00+00:00","description":"在看《JAVA 核心技术 卷I：基础知识》第11章《异常、日志、断言和调试》的时候，看到了有关 javac -Xlint 的内容，以前初学 Java 的时候，在命令行编译时经常会看到使用 javac -Xlint 重新编译的提示，但是当时又不理解，只是根据提示照做而已。现在看到相关介绍，就整理摘录下，以免日后又忘记了。","headline":"javac -Xlint 编译选项简介","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/intro-of-javac-xlint-option"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/intro-of-javac-xlint-option"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">javac -Xlint 编译选项简介</h1>
+  <article class="py-1">
+    <p>在看《JAVA 核心技术 卷I：基础知识》第11章《异常、日志、断言和调试》的时候，看到了有关 javac -Xlint 的内容，以前初学 Java 的时候，在命令行编译时经常会看到使用 javac -Xlint 重新编译的提示，但是当时又不理解，只是根据提示照做而已。现在看到相关介绍，就整理摘录下，以免日后又忘记了。</p>
+
+<p>在终端执行<code class="language-plaintext highlighter-rouge">javac -Xlint</code>会出现以下提示信息：
+    -Xlint                     Enable recommended warnings
+    -Xlint:{all,cast,deprecation,divzero,empty,unchecked,fallthrough,path,serial,finally,overrides,-cast,-deprecation,-divzero,-empty,-unchecked,-fallthrough,-path,-serial,-finally,-overrides,none}Enable or disable specific warnings</p>
+
+<p>“Enable recommended warnings”就是让编译器对一些普遍容易出现的代码问题进行检查。例如使用<code class="language-plaintext highlighter-rouge">javac -Xlint:fallthrough</code>这条编译命令的效果就是，当代码中的 switch 代码块缺少 break 时，编译器给出警告报告。</p>
+
+<p><em>术语“lint”最初用来描述一种定位 C 程序中潜在问题的工具，现在通常用于描述查找可疑的、但不违背语法规则的代码问题的工具。</em></p>
+
+<p>——《JAVA 核心技术 卷I：基础知识》</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Lint_\(software\)">lint wikipedia</a></p>
+
+<p>-Xlint 各个选项的详细作用，请使用<code class="language-plaintext highlighter-rouge">man javac</code>查阅。</p>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>RSpec 使用一周小结（上） | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="RSpec 使用一周小结（上）" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="过去一个星期，在开发中使用 RSpec 对系统的 API 进行了功能测试。在这个过程中现学现用，Rain 和 MC 对我写的测试提出了很多评审建议，现在记录下来，跟大家分享。" />
+<meta property="og:description" content="过去一个星期，在开发中使用 RSpec 对系统的 API 进行了功能测试。在这个过程中现学现用，Rain 和 MC 对我写的测试提出了很多评审建议，现在记录下来，跟大家分享。" />
+<link rel="canonical" href="https://hugochougt.com/blog/using-rspec-for-one-week-part-one" />
+<meta property="og:url" content="https://hugochougt.com/blog/using-rspec-for-one-week-part-one" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-08-20T15:30:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="RSpec 使用一周小结（上）" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2016-08-20T15:30:00+00:00","datePublished":"2016-08-20T15:30:00+00:00","description":"过去一个星期，在开发中使用 RSpec 对系统的 API 进行了功能测试。在这个过程中现学现用，Rain 和 MC 对我写的测试提出了很多评审建议，现在记录下来，跟大家分享。","headline":"RSpec 使用一周小结（上）","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/using-rspec-for-one-week-part-one"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/using-rspec-for-one-week-part-one"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">RSpec 使用一周小结（上）</h1>
+  <article class="py-1">
+    <p>过去一个星期，在开发中使用 RSpec 对系统的 API 进行了功能测试。在这个过程中现学现用，Rain 和 MC 对我写的测试提出了很多评审建议，现在记录下来，跟大家分享。</p>
+
+<h2 id="api-功能测试套路">API 功能测试套路</h2>
+
+<ol>
+  <li>setup data &amp; assert original state</li>
+  <li>do something</li>
+  <li>assert response</li>
+  <li>assert new state</li>
+</ol>
+
+<p>例如要测试用户注册，那就要先断言系统中没有用户，用户注册成功后，再断言系统中多了一个新用户。</p>
+
+<h2 id="测试代码-code-review-评论">测试代码 code review 评论</h2>
+
+<h3 id="1-不要-hack-原生方法">1. 不要 hack 原生方法</h3>
+
+<p>在测试 App API 的时候，有时候需要在请求头（或者其他地方）带上校验信息，为了不在每次请求的时候都重复准备校验信息，一开始我参考 <a href="https://github.com/ruby-china/ruby-china">ruby-china</a> 的做法：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># File: https://github.com/ruby-china/ruby-china/blob/master/spec/support/api_v3_support.rb#L27</span>
+
+<span class="p">[</span><span class="ss">:get</span><span class="p">,</span> <span class="ss">:post</span><span class="p">,</span> <span class="ss">:put</span><span class="p">,</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">:head</span><span class="p">].</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">method</span><span class="o">|</span>
+  <span class="nb">class_eval</span> <span class="o">&lt;&lt;-</span><span class="no">EOV</span><span class="sh">
+    def </span><span class="si">#{</span><span class="nb">method</span><span class="si">}</span><span class="sh">(path, parameters = nil, headers = nil)
+      # override empty params and headers with default
+      parameters = combine_parameters(parameters, default_parameters)
+      headers = combine_parameters(headers, default_headers)
+      super(path, params: parameters, headers: headers)
+    end
+</span><span class="no">  EOV</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>然后就收到 Rain 的评审批注：</p>
+
+<blockquote>
+  <p>这是hacking， 不要直接hack原生的helper方法，而是使用扩展方式，例如这样 <code class="language-plaintext highlighter-rouge">api_post</code> 或者
+ApiConsumer.config(app_config)
+ApiConsumer.post()
+建议这样，更方便测试不同的app_config，也可以为将来要做API的SDK做铺垫。</p>
+</blockquote>
+
+<p>后来 Rain 还为此写了个 mr：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="nn">AppApiV1Support</span>
+  <span class="kp">extend</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Concern</span>
+  <span class="n">included</span> <span class="k">do</span>
+    <span class="c1"># usage example:</span>
+    <span class="c1">#   let(:app_client) { api_consumer.config({id: '123', secret: '12345678'}) }</span>
+    <span class="c1">#   app_client.post '/app_api/v1/consumers', consumer</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:api_consumer</span><span class="p">)</span> <span class="p">{</span> <span class="no">ApiConsumer</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span> <span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">ApiConsumer</span>
+    <span class="nb">attr_accessor</span> <span class="ss">:api_config</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>
+      <span class="vi">@example</span> <span class="o">=</span> <span class="n">example</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">api_config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="n">new_config</span><span class="p">)</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">api_config</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="n">new_config</span><span class="p">)</span>
+      <span class="nb">self</span>
+    <span class="k">end</span>
+
+    <span class="c1"># define request methods like get/post to send default headers</span>
+    <span class="p">[</span><span class="ss">:get</span><span class="p">,</span> <span class="ss">:post</span><span class="p">,</span> <span class="ss">:put</span><span class="p">,</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">:head</span><span class="p">].</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">method</span><span class="o">|</span>
+      <span class="nb">class_eval</span> <span class="o">&lt;&lt;-</span><span class="no">EOV</span><span class="sh">
+        def </span><span class="si">#{</span><span class="nb">method</span><span class="si">}</span><span class="sh">(path, parameters = nil, headers = nil)
+          # merge headers with default
+          headers = (headers || {}).merge(default_headers)
+          @example.</span><span class="si">#{</span><span class="nb">method</span><span class="si">}</span><span class="sh">(path, parameters, headers)
+        end
+</span><span class="no">      EOV</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+      <span class="k">def</span> <span class="nf">default_headers</span>
+        <span class="p">{</span>
+          <span class="s1">'App-Id'</span><span class="p">:</span> <span class="n">api_config</span><span class="p">[</span><span class="ss">:id</span><span class="p">],</span>
+          <span class="s1">'App-Secret'</span><span class="p">:</span> <span class="n">api_config</span><span class="p">[</span><span class="ss">:secret</span><span class="p">],</span>
+          <span class="s1">'App-Platform'</span><span class="p">:</span> <span class="n">api_config</span><span class="p">[</span><span class="ss">:platform</span><span class="p">]</span> <span class="o">||</span> <span class="s1">'iOS'</span><span class="p">,</span>
+          <span class="s1">'App-Os-Version'</span><span class="p">:</span> <span class="n">api_config</span><span class="p">[</span><span class="ss">:os_version</span><span class="p">]</span> <span class="o">||</span> <span class="s1">'10.4'</span><span class="p">,</span>
+          <span class="s1">'App-Version'</span><span class="p">:</span> <span class="n">api_config</span><span class="p">[</span><span class="ss">:version</span><span class="p">]</span> <span class="o">||</span> <span class="s1">'1.0'</span>
+        <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+</code></pre></div></div>
+
+<h3 id="2-发送请求后记得-reload-内存中的对象再做断言">2. 发送请求后，记得 reload 内存中的对象再做断言</h3>
+
+<p>项目有以下关联关系：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Device</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">has_many</span> <span class="ss">:consumer_device_relations</span><span class="p">,</span> <span class="ss">dependent: :destroy</span>
+  <span class="n">has_many</span> <span class="ss">:consumers</span><span class="p">,</span> <span class="ss">through: :consumer_device_relations</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Consumer</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">has_many</span> <span class="ss">:consumer_device_relations</span><span class="p">,</span> <span class="ss">dependent: :destroy</span>
+  <span class="n">has_many</span> <span class="ss">:devices</span><span class="p">,</span> <span class="ss">through: :consumer_device_relations</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>然后有以下测试：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">it</span> <span class="s1">'binds device to a consumer'</span> <span class="k">do</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="nf">consumers</span><span class="p">).</span><span class="nf">not_to</span> <span class="kp">include</span><span class="p">(</span><span class="n">consumer</span><span class="p">)</span>
+
+  <span class="c1"># request to bind device to a consumer</span>
+
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">status</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">200</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="nf">consumers</span><span class="p">).</span><span class="nf">to</span> <span class="kp">include</span><span class="p">(</span><span class="n">consumer</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>如果不对 <code class="language-plaintext highlighter-rouge">device.consumers</code> reload 的话，最后一行的断言是会失败的。因为测试请求不会影响到内存中的对象。</p>
+
+<p>正确的写法应该是：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">expect</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="nf">consumers</span><span class="p">.</span><span class="nf">reload</span><span class="p">).</span><span class="nf">to</span> <span class="kp">include</span><span class="p">(</span><span class="n">consumer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>也有另外的写法：<code class="language-plaintext highlighter-rouge">device.reload.consumers</code>。区别就是 <code class="language-plaintext highlighter-rouge">device.consumers.reload</code> 主要是测试 device.consumers 的变化，而 <code class="language-plaintext highlighter-rouge">device.reload.consumers</code> 主要测试 device 的变化。</p>
+
+<h3 id="3-context-写到-it-的同级之后">3. context 写到 it 的同级之后</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Bad</span>
+<span class="n">describe</span> <span class="s1">'POST /api/v1/users'</span> <span class="k">do</span>
+  <span class="n">context</span> <span class="s1">'when email is missing'</span> <span class="k">do</span>
+    <span class="c1"># test code</span>
+  <span class="k">end</span>
+
+  <span class="n">context</span> <span class="s1">'when password does not match password_confirmation'</span> <span class="k">do</span>
+    <span class="c1"># test code</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'creates a new user'</span> <span class="k">do</span>
+    <span class="c1"># test code</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># Good</span>
+<span class="n">describe</span> <span class="s1">'POST /api/v1/users'</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'creates a new user'</span> <span class="k">do</span>
+    <span class="c1"># test code</span>
+  <span class="k">end</span>
+
+  <span class="n">context</span> <span class="s1">'when email is missing'</span> <span class="k">do</span>
+    <span class="c1"># test code</span>
+  <span class="k">end</span>
+
+  <span class="n">context</span> <span class="s1">'when password does not match password_confirmation'</span> <span class="k">do</span>
+    <span class="c1"># test code</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h3 id="4-一个-it-对应多个-expects-vs-每个-expect-对应一个-it">4. “一个 it 对应多个 expects” VS “每个 expect 对应一个 it”</h3>
+
+<p>在测试用户授权设备的断言时，我是这样写的：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">it</span> <span class="s1">'authorizes the device'</span> <span class="k">do</span>
+  <span class="c1"># test code</span>
+
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">status</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">200</span>
+  <span class="n">expect</span><span class="p">(</span><span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)).</span><span class="nf">to</span> <span class="kp">include</span><span class="p">({</span> <span class="s1">'authorized'</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">})</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="nf">reload</span><span class="p">.</span><span class="nf">authorized</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="kp">true</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>然后 MC 评论：</p>
+
+<blockquote>
+  <p>这个it我一般分成3个it来写</p>
+</blockquote>
+
+<blockquote>
+  <p>几年前看书是说分3个写的，这样有多少个错误就能真实反映出来了，不然可能出现修好了第一个断言后，继续跑测试第二个断言又出错了</p>
+</blockquote>
+
+<blockquote>
+  <p>3个断言都有问题，如果写在一起，只会报一个错误</p>
+</blockquote>
+
+<blockquote>
+  <p>而且输出的内容更直观，如 it ‘should get 200 code’,  it ’should include authorized params’</p>
+</blockquote>
+
+<p>Rain 回复：</p>
+
+<blockquote>
+  <p>是有推荐分3个写，但3个写会跑三次测试，有个性能问题。只要任何一个错，这个表示功能就是失败的，我们主要目标是让这个功能成功实现。如果3个测试1个出错，2个通过，会有这个功能2/3是正常的“错觉”，但实际这个功能就是不可用的</p>
+</blockquote>
+
+<p>最后因为测试比较简单，三个断言就写在了一个 it block 里。</p>
+
+<p>当然有复杂的情况是分开写的：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># File: spec/requests/web_api/v1/users_spec.rb</span>
+
+<span class="n">describe</span> <span class="s1">'API V1'</span><span class="p">,</span> <span class="s1">'users'</span><span class="p">,</span> <span class="ss">type: :request</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:enterprise</span><span class="p">)</span> <span class="p">{</span> <span class="n">create</span><span class="p">(</span><span class="ss">:enterprise</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>       <span class="p">{</span> <span class="n">enterprise</span><span class="p">.</span><span class="nf">owner</span> <span class="p">}</span>
+
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">login_as</span> <span class="n">user</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'GET /web_api/v1/users'</span> <span class="k">do</span>
+    <span class="n">let!</span><span class="p">(</span><span class="ss">:user_b</span><span class="p">)</span> <span class="p">{</span> <span class="n">create</span><span class="p">(</span><span class="ss">:enterprise</span><span class="p">).</span><span class="nf">owner</span> <span class="p">}</span>
+
+    <span class="n">before</span> <span class="k">do</span>
+      <span class="n">get</span> <span class="s1">'/web_api/v1/users'</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'responses 200 status code'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">status</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">200</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s2">"gets enterprise's all users"</span> <span class="k">do</span>
+      <span class="n">user_ids</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)[</span><span class="s1">'data'</span><span class="p">].</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="n">user</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="p">}</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">user_ids</span><span class="p">.</span><span class="nf">size</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">user_ids</span><span class="p">).</span><span class="nf">to</span> <span class="kp">include</span> <span class="n">user</span><span class="p">.</span><span class="nf">id</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">user_ids</span><span class="p">).</span><span class="nf">not_to</span> <span class="kp">include</span> <span class="n">user_b</span><span class="p">.</span><span class="nf">id</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>这里有几个需要注意的地方：</p>
+
+<ol>
+  <li>let 语句后的 block 最好能对齐。</li>
+  <li>需要用 <code class="language-plaintext highlighter-rouge">let!</code> 强制创建一个不在测试企业内的用户，以确保断言的时候不会因为 <code class="language-plaintext highlighter-rouge">user_b</code> 还没创建，使得测试不像预期那样通过。</li>
+</ol>
+
+<h2 id="其他用到的测试相关-gem">其他用到的测试相关 gem</h2>
+
+<ol>
+  <li><a href="https://github.com/thoughtbot/factory_girl_rails">factory_girl_rails</a>: 基本上使用 RSpec 测试的，都会同时使用 FactoryGirl 来作为准备测试数据的 fixture 了。</li>
+  <li><a href="https://github.com/bblimke/webmock">webmock</a>: 如果你测试的功能涉及到请求第三方的网络服务，那可以使用这个 gem。</li>
+</ol>
+
+<h2 id="一些参考资料">一些参考资料</h2>
+
+<ol>
+  <li><a href="http://jakegoulding.com/presentations/rspec-structure/">Structure of RSpec tests</a></li>
+  <li><a href="http://betterspecs.org/">Better Specs { rspec guidelines with ruby }</a></li>
+  <li><a href="https://github.com/reachlocal/rspec-style-guide">The RSpec Style Guide</a></li>
+</ol>
+
+<p>更新说明：本文第一版先发于我自己的 blog，后来修改版本经 CTO Rain 审阅后，发布于 Beansmile 官方 blog：<a href="http://www.beansmile.com/blog/posts/using-rspec-for-one-week-part-one">RSpec 使用一周小结（上篇）</a>，然后再更新到这里。懂 Git 的读者可以 git log 一下本文的修改情况。</p>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[Ruby] 从文件中读取 JSON 数据并转为 Hash | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="[Ruby] 从文件中读取 JSON 数据并转为 Hash" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="最近开发的时候需要调用另一服务的 API 来获取报表数据，但是网络请求比较慢，就想先把 JSON 数据保存一份在文件中，实现页面的时候就先读文件里的数据显示好了。" />
+<meta property="og:description" content="最近开发的时候需要调用另一服务的 API 来获取报表数据，但是网络请求比较慢，就想先把 JSON 数据保存一份在文件中，实现页面的时候就先读文件里的数据显示好了。" />
+<link rel="canonical" href="https://hugochougt.com/blog/ruby-reading-a-json-file-to-hash" />
+<meta property="og:url" content="https://hugochougt.com/blog/ruby-reading-a-json-file-to-hash" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-11-14T12:17:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[Ruby] 从文件中读取 JSON 数据并转为 Hash" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2015-11-14T12:17:00+00:00","datePublished":"2015-11-14T12:17:00+00:00","description":"最近开发的时候需要调用另一服务的 API 来获取报表数据，但是网络请求比较慢，就想先把 JSON 数据保存一份在文件中，实现页面的时候就先读文件里的数据显示好了。","headline":"[Ruby] 从文件中读取 JSON 数据并转为 Hash","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/ruby-reading-a-json-file-to-hash"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/ruby-reading-a-json-file-to-hash"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">[Ruby] 从文件中读取 JSON 数据并转为 Hash</h1>
+  <article class="py-1">
+    <p>最近开发的时候需要调用另一服务的 API 来获取报表数据，但是网络请求比较慢，就想先把 JSON 数据保存一份在文件中，实现页面的时候就先读文件里的数据显示好了。</p>
+
+<p>Google 后，找到 <a href="https://hackhands.com/ruby-read-json-file-hash/">Ruby: Reading a .json File to Hash</a> 这篇很简明的教程，然后评论里指出了原文说的 <code class="language-plaintext highlighter-rouge">File.read</code> 创建 file handle 的错误。这个错误我觉得还是很普遍的，所以写本文记录一下。</p>
+
+<p>数据示例：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"zhaqiang"</span><span class="p">,</span>
+  <span class="s2">"job"</span><span class="p">:</span> <span class="s2">"Web Developer"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>代码示例：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">json_string</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s1">'/path/to/data.json'</span><span class="p">)</span> <span class="c1"># 这里返回的不是 file handle，只是 string</span>
+<span class="n">me</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span>
+
+<span class="n">me</span><span class="p">.</span><span class="nf">is_a?</span> <span class="no">Hash</span>
+<span class="o">=&gt;</span> <span class="kp">true</span>
+<span class="n">me</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+<span class="o">=&gt;</span> <span class="s2">"zhaqiang"</span>
+<span class="n">me</span><span class="p">[</span><span class="s2">"job"</span><span class="p">]</span>
+<span class="o">=&gt;</span> <span class="s2">"Web Developer"</span>
+</code></pre></div></div>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

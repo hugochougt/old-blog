@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>MySQL 高可用解决方案简介 | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="MySQL 高可用解决方案简介" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="因工作需要近段时间收集并阅读了不少关于 MySQL HA（High Availability，高可用）的资料，现在整理一下做个总结，主要是为自己写的，但同时也希望会对搜索到本文的读者有帮助。" />
+<meta property="og:description" content="因工作需要近段时间收集并阅读了不少关于 MySQL HA（High Availability，高可用）的资料，现在整理一下做个总结，主要是为自己写的，但同时也希望会对搜索到本文的读者有帮助。" />
+<link rel="canonical" href="https://hugochougt.com/blog/high-availability-solutions-for-mysql" />
+<meta property="og:url" content="https://hugochougt.com/blog/high-availability-solutions-for-mysql" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2014-01-13T20:34:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="MySQL 高可用解决方案简介" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2014-01-13T20:34:00+00:00","datePublished":"2014-01-13T20:34:00+00:00","description":"因工作需要近段时间收集并阅读了不少关于 MySQL HA（High Availability，高可用）的资料，现在整理一下做个总结，主要是为自己写的，但同时也希望会对搜索到本文的读者有帮助。","headline":"MySQL 高可用解决方案简介","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/high-availability-solutions-for-mysql"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/high-availability-solutions-for-mysql"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">MySQL 高可用解决方案简介</h1>
+  <article class="py-1">
+    <p>因工作需要近段时间收集并阅读了不少关于 MySQL HA（High Availability，高可用）的资料，现在整理一下做个总结，主要是为自己写的，但同时也希望会对搜索到本文的读者有帮助。</p>
+
+<p>MySQL HA 的关键点不外乎<strong>数据同步</strong>和<strong>失效切换</strong>这两点。对于数据同步，MySQL 本身就有异步复制和半同步复制的功能（半同步复制在 MySQL 5.5之后的版本才有）。异步和半同步复制都会有数据不一致的风险，要保证数据一致性，就只能采用共享存储的方法。共享存储这一块我也没有做太多的调研，不过猜测使用最广泛的应该是 DRBD（Distributed Replicated Block Device），因为 NAS 和 SAN 等共享存储方案的成本太高。至于失效切换（failover），我了解到的就只有 <a href="http://www.keepalived.org/">Keepalived</a> 和 <a href="http://www.linux-ha.org/wiki/Heartbeat">Heartbeat</a>。一般来说 Keepalived 会搭配 MySQL Master-Master replication 的架构，而 Heartbeat 则搭配 DRBD。</p>
+
+<p>另外两个较为独立的 HA 解决方案是 <a href="www.percona.com">Percona</a> 公司开发的 Percona XtraDB Cluster 和 MySQL 本身的 MySQL Cluster。</p>
+
+<p>在你选择一个高可用性方案前，你需要先问问自己这个问题：</p>
+
+<p><strong>你是否真的需要 MySQL HA？</strong></p>
+
+<p>如果你的回答是 Yes，那么接下来你还有一堆问题要回答：</p>
+
+<ol>
+  <li>你需要哪个级别的 HA？</li>
+  <li>你能不能忍受数据丢失？</li>
+  <li>你的应用是否使用了 MyISAM 存储引擎特有的特性？</li>
+  <li>应用的 write load 如何？</li>
+  <li>你规划的数据库容量多大？</li>
+  <li>你或你员工的水平有多高？</li>
+  <li>预算有多少？</li>
+</ol>
+
+<p>以上7个问题翻译自 <a href="http://www.mysqlperformanceblog.com/2009/10/16/finding-your-mysql-high-availability-solution-%E2%80%93-the-questions/">Finding your MySQL High-Availability solution - The questions</a>，该 blog 中有对各个问题的总结性解答，虽然写于2009，但我觉得现在还是有很高的参考价值。文后的评论也值得一读。</p>
+
+<p>想了解各种主流 MySQL HA 方案的简述和优缺点，可阅读 <a href="http://www.percona.com/resources/technical-presentations/choosing-mysql-high-availability-solution-webinar-choosing-high">Choosing a MySQL High Availability Solution</a> 这个 slide 和这篇 blog <a href="http://www.mysqlperformanceblog.com/2013/10/23/high-availability-options-for-mysql-october-2013-update/">High-availability options for MySQL, October 2013 update</a>，然后再 google 其关键词搜索方案的详细原理和配置步骤等信息。</p>
+
+<p>总的来说，MySQL HA 没有通用的解决方案，每个方案都有各自的优缺点，你需要根据自己应用的实际情况，选择合适的 HA 方案。</p>
+
+<hr />
+
+<p>自己前后也尝试搭建过几个 MySQL HA 方案，Percona XtraDB Cluster 没有搭建成功，DRBD + Heartbeat 的方案不适合在虚拟机上做测试，也就没有花时间弄了。搭建成功的就只有 MySQL Master-Master replication + Keepalived 的架构。后来了解到半同步复制，也搭建成功了。然后就使用 MySQL 自带的 sql-bench 工具分别对异步复制和半同步复制的性能进行了测试。测试完后，发现在内网网络环境较好的情况下，半同步复制并没有使 MySQL 的性能有明显的下降。所以，在应用提交的多数是小事务，并且主机之间的网络延迟较小的情况下，应优先选择配置半同步复制实现 MySQL HA，以大大减少出现数据不一致的风险。</p>
+
+<p>本来想贴出性能比较的数据表的，不过 google 了一下，发现 Octopress 不支持表格，那就算了。</p>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

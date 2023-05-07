@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+
+  <link rel="shortcut icon" href="/assets/images/logo.png " type="image/png">
+  <link rel="icon" href="/assets/images/logo.png " type="image/png">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[Rails] 在 validates_presence_of 中使用 :allow_nil =&gt; true | Hugo Chou 周昌权</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="[Rails] 在 validates_presence_of 中使用 :allow_nil =&gt; true" />
+<meta name="author" content="Hugo Chou" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="今天在实现一个当用户 update profile 时必须上传头像的功能，被 CTO review 代码后要求在 validates_presence_of :avatar, on: :update 语句后添加 :allow_nil =&gt; true。当时十分不解，问了 CTO 原因，CTO 解释的大意是如果不使用 :allow_nil =&gt; true，当用户已经上传了头像，在 edit profile 时就每次都上传头像了。" />
+<meta property="og:description" content="今天在实现一个当用户 update profile 时必须上传头像的功能，被 CTO review 代码后要求在 validates_presence_of :avatar, on: :update 语句后添加 :allow_nil =&gt; true。当时十分不解，问了 CTO 原因，CTO 解释的大意是如果不使用 :allow_nil =&gt; true，当用户已经上传了头像，在 edit profile 时就每次都上传头像了。" />
+<link rel="canonical" href="https://hugochougt.com/blog/rails-validates-presence-of-with-allow-nil-true" />
+<meta property="og:url" content="https://hugochougt.com/blog/rails-validates-presence-of-with-allow-nil-true" />
+<meta property="og:site_name" content="Hugo Chou 周昌权" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-02-04T21:45:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[Rails] 在 validates_presence_of 中使用 :allow_nil =&gt; true" />
+<meta name="twitter:site" content="@hugochougt" />
+<meta name="twitter:creator" content="@hugochougt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hugo Chou","url":"https://hugochougt.com"},"dateModified":"2015-02-04T21:45:00+00:00","datePublished":"2015-02-04T21:45:00+00:00","description":"今天在实现一个当用户 update profile 时必须上传头像的功能，被 CTO review 代码后要求在 validates_presence_of :avatar, on: :update 语句后添加 :allow_nil =&gt; true。当时十分不解，问了 CTO 原因，CTO 解释的大意是如果不使用 :allow_nil =&gt; true，当用户已经上传了头像，在 edit profile 时就每次都上传头像了。","headline":"[Rails] 在 validates_presence_of 中使用 :allow_nil =&gt; true","mainEntityOfPage":{"@type":"WebPage","@id":"https://hugochougt.com/blog/rails-validates-presence-of-with-allow-nil-true"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hugochougt.com/assets/images/logo.png"},"name":"Hugo Chou"},"url":"https://hugochougt.com/blog/rails-validates-presence-of-with-allow-nil-true"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="flex flex-wrap items-center justify-center px-2 py-6">
+  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
+    <div class="flex md:block" id="navbar">
+      <div class="flex mr-auto w-full">
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/">
+          Home
+        </a>
+        
+        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
+          href="/blog/">
+          Blog
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="flex flex-wrap items-center justify-center mx-auto px-4 pt-4 prose prose-stone">
+  <h1 class="text-center mt-6 mb-6">[Rails] 在 validates_presence_of 中使用 :allow_nil => true</h1>
+  <article class="py-1">
+    <p>今天在实现一个当用户 update profile 时必须上传头像的功能，被 CTO review 代码后要求在 <code class="language-plaintext highlighter-rouge">validates_presence_of :avatar, on: :update</code> 语句后添加 <code class="language-plaintext highlighter-rouge">:allow_nil =&gt; true</code>。当时十分不解，问了 CTO 原因，CTO 解释的大意是如果不使用 <code class="language-plaintext highlighter-rouge">:allow_nil =&gt; true</code>，当用户已经上传了头像，在 edit profile 时就每次都上传头像了。</p>
+
+<p>查阅了 API 文档后，摘抄其说明：</p>
+
+<blockquote>
+  <p>:allow_nil - If set to true, skips this validation if the attribute is nil</p>
+</blockquote>
+
+<p>这样做之后就只在 :photo 是 blank 的情况不通过验证。</p>
+
+<p>这里的知识点就是 Rails 的 ActiveModel::Validator 有 allow_nil 和 allow_blank 重要选项。附源码：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># File activemodel/lib/active_model/validator.rb, line 149</span>
+<span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+  <span class="n">attributes</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="o">|</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">record</span><span class="p">.</span><span class="nf">read_attribute_for_validation</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+    <span class="k">next</span> <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="nf">nil?</span> <span class="o">&amp;&amp;</span> <span class="n">options</span><span class="p">[</span><span class="ss">:allow_nil</span><span class="p">])</span> <span class="o">||</span> <span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="nf">blank?</span> <span class="o">&amp;&amp;</span> <span class="n">options</span><span class="p">[</span><span class="ss">:allow_blank</span><span class="p">])</span>
+    <span class="n">validate_each</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>另外就是查阅 API 时还留意到：</p>
+
+<blockquote>
+  <p>If you want to validate the presence of a boolean field (where the real values are true and false), you will want to use validates_inclusion_of :field_name, :in =&gt; [true, false].</p>
+</blockquote>
+
+<p>简单翻译下就是：如果想验证是否提供了布尔值，应该使用 <code class="language-plaintext highlighter-rouge">validates_inclusion_of :field_name, :in =&gt; [true, false]</code>。</p>
+
+<p>原因是 Rails 中 <code class="language-plaintext highlighter-rouge">false.blank?</code> 返回 true。如果是使用 <code class="language-plaintext highlighter-rouge">validates_presence_of :field_name</code>，那么当 <code class="language-plaintext highlighter-rouge">field_name</code> 被设为 fasle 时，验证就会总是不通过。</p>
+
+<p>-EOF-</p>
+
+  </article>
+</div>
+
+    <footer class="relative px-4 pt-4 pb-4">
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="text-sm text-gray-300">
+      &copy; 2023 Hugo Chou
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
