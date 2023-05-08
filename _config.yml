@@ -45,13 +45,6 @@ postcss:
 feed:
   path: atom.xml
 
-sass:
-  load_paths:
-    - _sass
-    - node_modules
-
-include: ["node_modules/tailwindcss"]
-
 # Pagination - https://jekyllrb.com/docs/pagination/
 paginate: 10
 paginate_path: /blog/page:num/
