@@ -4,8 +4,9 @@ source "https://rubygems.org"
 
 # a blog-aware static site generator in Ruby
 # https://github.com/jekyll/jekyll
-gem "jekyll"
+gem "jekyll", "~> 4.1"
 gem "webrick"
+ gem "jekyll-environment-variables"
 
 group :jekyll_plugins do
   # A Jekyll plugin to generate an Atom (RSS-like) feed of your Jekyll posts
