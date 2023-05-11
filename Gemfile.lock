@@ -34,6 +34,8 @@ GEM
       webrick (~> 1.7)
     jekyll-compose (0.12.0)
       jekyll (>= 3.7, < 5.0)
+    jekyll-environment-variables (1.0.1)
+      jekyll (>= 3.0, < 5.x)
     jekyll-feed (0.17.0)
       jekyll (>= 3.7, < 5.0)
     jekyll-paginate (1.1.0)
@@ -78,8 +80,9 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  jekyll
+  jekyll (~> 4.1)
   jekyll-compose
+  jekyll-environment-variables
   jekyll-feed
   jekyll-paginate
   jekyll-postcss
