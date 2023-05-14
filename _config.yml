@@ -6,7 +6,7 @@ email: hugochougt@gmail.com
 description: Experienced software engineer with 10+ years in commercial app & software dev. Launched 20+ apps incl. iOS/Android, WeChat Mini Programs & websites
 baseurl: ""
 url: https://hugochougt.com
-date_format: "%b %d, %Y"
+date_format: "%B %-d, %Y"
 repo: https://github.com/hugochougt/hugochougt.github.io
 permalink: /:categories/:title
 number_of_posts: 5
@@ -37,10 +37,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-paginate
-  - jekyll-postcss
-
-postcss:
-  cache: false
 
 feed:
   path: atom.xml
@@ -56,10 +52,6 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
-  - package.json
-  - package-lock.json
-  - postcss.config.js
-  - tailwind.config.js
 
 # Front Matter Defaults
 defaults:

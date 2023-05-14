@@ -1,0 +1,46 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+    <link rel="shortcut icon" href="{{ site.logo | relative_url }} " type="image/png">
+    <link rel="icon" href="{{ site.logo | relative_url }} " type="image/png">
+    {% seo %}
+  </head>
+  <body>
+    {% include navbar.html %}
+    <main class="page-body">
+      <section class="section">
+        <div class="container is-max-desktop">
+          <figure class="image is-128x128 mx-auto">
+            <img class="is-rounded" src="{{ site.author.picture }}">
+          </figure>
+          <p class="is-size-3 has-text-centered">
+            {{ site.author.name }}
+          </p>
+          <p class="is-size-6 has-text-centered has-text-grey">
+            Software Engineer in Guangzhou
+          </p>
+          <nav class="breadcrumb is-centered has-dot-separator mt-5">
+            <ul>
+              {% for item in site.data.sns %}
+              <li>
+                <a href="{{ item.link }}" target="_blank">
+                  <figure class="image is-24x24 mx-auto">
+                    <img src="{{ item.icon }}">
+                  </figure>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+      </section>
+    </main>
+    {% include footer.html %}
+  </body>
+</html>

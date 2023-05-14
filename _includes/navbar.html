@@ -1,14 +1,13 @@
-<nav class="flex flex-wrap items-center justify-center px-2 py-6">
-  <div class="container px-4 mx-auto flex flex-wrap items-center justify-center">
-    <div class="flex md:block" id="navbar">
-      <div class="flex mr-auto w-full">
-        {% for item in site.data.menu %}
-        <a class="text-sm text-gray-500 hover:text-gray-900 px-3 py-2 lg:py-1 mx-auto uppercase"
-          href="{{ item.url }}">
-          {{ item.name }}
-        </a>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
+<nav class="breadcrumb is-centered has-bullet-separator my-4" aria-label="breadcrumbs">
+  <ul>
+    {% for item in site.data.nav | sort: "weight" %}
+    {% assign current_url_prefix = page.url | slice: 0, 4 %}
+    {% assign item_url_prefix = item.url | slice: 0, 4 %}
+    <li class="{% if current_url_prefix == item_url_prefix %}is-active{% endif %}">
+      <a href="{{ item.url }}" >
+        {{ item.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
 </nav>
