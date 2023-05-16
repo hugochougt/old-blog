@@ -4,9 +4,8 @@ source "https://rubygems.org"
 
 # a blog-aware static site generator in Ruby
 # https://github.com/jekyll/jekyll
-gem "jekyll", "~> 4.1"
+gem "jekyll"
 gem "webrick"
- gem "jekyll-environment-variables"
 
 group :jekyll_plugins do
   # A Jekyll plugin to generate an Atom (RSS-like) feed of your Jekyll posts
@@ -28,8 +27,4 @@ group :jekyll_plugins do
   # Pagination Generator for Jekyll
   # https://github.com/jekyll/jekyll-paginate
   gem "jekyll-paginate"
-
-  # A plugin to use PostCSS plugins like Autoprefixer or Tailwind CSS with Jekyll
-  # https://github.com/mhanberg/jekyll-postcss
-  gem "jekyll-postcss"
 end

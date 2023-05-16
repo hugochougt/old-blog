@@ -1,0 +1,15 @@
+<nav class="pagination" role="navigation" aria-label="pagination">
+  <div class="container mx-auto">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path }}" class="pagination-previous">Prev</a>
+    {% else %}
+      <a class="pagination-previous is-disabled" title="This is the first page">Prev</a>
+    {% endif %}
+
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}" class="pagination-next">Next</a>
+    {% else %}
+      <a class="pagination-next is-disabled" title="This is the last page">Next</a>
+    {% endif %}
+  </div>
+</nav>
