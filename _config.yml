@@ -4,11 +4,11 @@ title: Hugo Chou 周昌权
 tagline: Learn. Write. Share. Repeat.
 email: hugochougt@gmail.com
 description: Experienced software engineer with 10+ years in commercial app & software dev. Launched 20+ apps incl. iOS/Android, WeChat Mini Programs & websites
-baseurl: ""
-url: https://hugochougt.com
+baseurl: "/old-blog"
+url: https://hugochougt.com/old-blog
 date_format: "%B %-d, %Y"
-repo: https://github.com/hugochougt/hugochougt.github.io
-permalink: /:categories/:title
+repo: https://github.com/hugochougt/old-blog
+permalink: "/:categories/:title"
 number_of_posts: 5
 
 # SEO

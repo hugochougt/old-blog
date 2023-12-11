@@ -5,7 +5,7 @@ excerpt: 人生第一次在大海冲浪
 date: 2016-08-10 21:54
 ---
 
-![sea-phuket-thailand](/images/posts/sea-phuket-thailand.jpg)
+![sea-phuket-thailand](/old-blog/images/posts/sea-phuket-thailand.jpg)
 
 8月8日至10日这三天，刚好在普吉旅游，趁机尝试了在中国内陆都没法进行的浮潜、在海边的沙滩上跑步以及冲浪。
 

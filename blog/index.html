@@ -7,7 +7,7 @@ title: Blog
   <div class="container is-max-desktop content">
   {% for post in paginator.posts %}
     <h2 class="is-size-2 is-size-4-mobile">
-      <a href="{{ post.url }}">
+      <a href="{{ post.url | relative_url }}">
         {{ post.title }}
       </a>
     </h2>

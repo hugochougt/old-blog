@@ -28,7 +28,7 @@ date: 2016-08-13 19:44
 
 >嗯？我坐在头等舱？
 
-![Ins First Class](/images/posts/travel-abroad/ins-first-class.jpg)
+![Ins First Class](/old-blog/images/posts/travel-abroad/ins-first-class.jpg)
 
 飞机于泰国当地时间10点20分落地了，超级准时。
 
@@ -50,7 +50,7 @@ date: 2016-08-13 19:44
 
 习惯了早起，第二天7点半就起床了（其实已经是北京时间的8点半了）。在等他们三人起床的这段时间，自己在酒店房间外看了 RSpec 相关的视频，并写了公司进行中的项目相关测试代码。因为8月底有晋升高级工程师的考核，所以旅游也都带上了电脑，见缝插针地准备一下。
 
-![Coding at Cozy Inn](/images/posts/travel-abroad/coding-at-cozy-inn.jpg)
+![Coding at Cozy Inn](/old-blog/images/posts/travel-abroad/coding-at-cozy-inn.jpg)
 
 我们慢吞吞吃完早餐，就在路边包了辆双条车去素贴山逛双龙寺。四个人来回要800 Baht。上山的路九曲十三弯。不过司机很好人地主动在山腰的一个观景台停车，让我们拍了俯瞰清迈的风景照和合照。到达山顶后，走了三百多级的台阶，到达双龙寺。参观过程中还下起雨来，加上大雾，本来可以看到清迈全景的瞭望台，只能看到一片白雾。
 
@@ -100,7 +100,7 @@ Z ，没错还是 Z，提前在淘宝订了皇帝岛的浮潜项目。
 
 浮潜了一个小时，在海水里游泳感觉超棒，海里还有很多鱼。浮潜完就在岛的另一边食午饭，吃完还是在海滩边逛。
 
-![Sea of Phuket](/images/posts/sea-phuket-thailand.jpg)
+![Sea of Phuket](/old-blog/images/posts/sea-phuket-thailand.jpg)
 
 下午2点左右自己继续在海边游水，游了差不多45分钟。到了写下这段流水账的8月16日，才发现自己后背晒到脱皮了。
 
@@ -174,7 +174,7 @@ Check in 后发现这间酒店的房间是这么多天住过的酒店里最大�
 
 当拿到咖啡师给我的咖啡时，我赞美了一句：“It's beautiful!”。那位金发咖啡师听了也笑了。
 
-![Starbuck Coffee Lunch](/images/posts/travel-abroad/starbuck-coffee-lunch.jpg)
+![Starbuck Coffee Lunch](/old-blog/images/posts/travel-abroad/starbuck-coffee-lunch.jpg)
 
 写到8点半左右就回酒店继续写。
 
