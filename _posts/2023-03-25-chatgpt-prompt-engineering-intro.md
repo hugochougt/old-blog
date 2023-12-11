@@ -47,7 +47,7 @@ Text: ###
 
 两个咒语的输出对比：
 
-![promtp-with-comparison](/images/posts/chatgpt-prompt/promtp-with-comparison.png)
+![promtp-with-comparison](/old-blog/images/posts/chatgpt-prompt/promtp-with-comparison.png)
 
 ## 3. 通过示例阐述期望的输出格式
 
@@ -73,7 +73,7 @@ Text: ###
 
 下面截图示例的数据是我的一个朋友让我帮忙处理 100 多条不规则的文件名数据。
 
-![prompt-with-output-format](/images/posts/chatgpt-prompt/prompt-with-output-format.png)
+![prompt-with-output-format](/old-blog/images/posts/chatgpt-prompt/prompt-with-output-format.png)
 
 ## 4. 减少“空洞”和不准确的描述
 
